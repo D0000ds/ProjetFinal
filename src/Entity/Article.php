@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -36,6 +38,24 @@ class Article
 
     #[ORM\Column]
     private ?int $qte = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Categorie $categorie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Origine $origine = null;
+
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
+    private Collection $Tag;
+
+    #[ORM\ManyToMany(targetEntity: Avis::class, inversedBy: 'articles')]
+    private Collection $avis;
+
+    public function __construct()
+    {
+        $this->Tag = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +154,78 @@ class Article
     public function setQte(int $qte): static
     {
         $this->qte = $qte;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getOrigine(): ?Origine
+    {
+        return $this->origine;
+    }
+
+    public function setOrigine(?Origine $origine): static
+    {
+        $this->origine = $origine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
+    {
+        return $this->Tag;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->Tag->contains($tag)) {
+            $this->Tag->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        $this->Tag->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        $this->avis->removeElement($avi);
 
         return $this;
     }

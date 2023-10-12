@@ -29,6 +29,15 @@ class Commande
     #[ORM\Column(length: 10)]
     private ?string $telephone = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?Adresse $adresse = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Facture $facture = null;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?User $client = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +99,42 @@ class Commande
     public function setTelephone(string $telephone): static
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?Adresse
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(?Adresse $adresse): static
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getFacture(): ?Facture
+    {
+        return $this->facture;
+    }
+
+    public function setFacture(?Facture $facture): static
+    {
+        $this->facture = $facture;
+
+        return $this;
+    }
+
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
