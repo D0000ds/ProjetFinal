@@ -6,18 +6,14 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('Css/style.css')}}">
         {% endblock %}
     </head>
     <body>
         <header>
             <nav>
                 <figure>
-                    <span>LOGO</span>
+                    <img src="" alt="logo">
                 </figure>
                 <ul>
                     <li><a href="">CAFÉES MOULUES</a></li>
@@ -36,6 +32,10 @@
             </nav>
         </header>
         {% block body %}
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('Js/appSliders.js')}}"></script>
+            <script src="https://kit.fontawesome.com/4eb7898d29.js" crossorigin="anonymous"></script>
         {% endblock %}
     </body>
 </html>

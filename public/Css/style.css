@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Alatsi-Regular;
+    src: url("../Font/Alatsi-Regular.ttf");
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Alatsi-Regular', sans-serif;
+}
+/* ******************************************body****************************************************** */
+
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    height: 150px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+.sliderFigure{
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    object-fit: cover;
+    position: absolute;
+    transition: 1s;
+}
+
+.sliderButton{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sliderBoutton{
+    background-color: #765827;
+    border: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 22px;
+    position: relative;
+}

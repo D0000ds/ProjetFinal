@@ -1,7 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}CoffMulhouse{% endblock %}
 
 {% block body %}
-
+<div class="container">
+    <div class="sliderContainer">
+        <figure class="sliderFigure">
+            <img src="{{ asset('Img/coffeeSlider.jpg')}}" alt="un cafe" class="slide">
+            <img src="{{ asset('Img/coffeLover.jpg')}}" alt="un cafe avec un coeur" class="slide">
+            <img src="{{ asset('Img/coffeeTrad.jpg')}}" alt="un cafe avec un croissant" class="slide">
+            <div class="sliderButton">
+                <button class="sliderBoutton" onclick="goPrev()"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+                <button class="sliderBoutton" onclick="goNext()"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
+            </div>
+        </figure>
+    </div>
+    <div>
+        <h2>Bienvenue</h2>
+        <h1>a CoffMulhouse</h1>
+        <h3>le meilleure café de Mulhouse</h3>
+    </div>
+</div>
 {% endblock %}
