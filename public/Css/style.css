@@ -65,3 +65,133 @@
     font-size: 22px;
     position: relative;
 }
+
+.infoResto{
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bienvenue {
+    color: #65451F;
+}
+
+.infoRestoTitle {
+    font-size: 55px;
+}
+
+.articleResto{
+    margin-right: 5%;
+    text-align: justify;
+    width: 25%;
+}
+
+.articleEtImage {
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.slide2{
+    width: 480px;
+    height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+    position: absolute;
+    transition: 1s;
+}
+
+.slider2Figure{
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.asideHomePage{
+    display: flex;
+    justify-content: center;
+    width: 480px;
+    height: 300px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.slider2Boutton{
+    background-color: transparent;
+    border: 0;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50px;
+    font-size: 22px;
+    position: relative;
+}
+
+.slider2Button{
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.cardContainer {
+    padding-left: 1%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.sousCardContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: #C8AE7D solid 1px;
+    align-items: center;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.cardLink{
+    text-decoration: none;
+    color: black;
+}
+
+.figureCard{
+    width: 100%;
+}
+
+.figureCard img {
+    width: 100%;
+    height: 100px;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: #C8AE7D solid 1px;
+    object-fit: cover;
+}
+
+.cardArticleTitle{
+    font-size: 22px;
+}
+.rating{
+    padding-top: 20%;
+    font-size: 20px;
+}

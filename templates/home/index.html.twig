@@ -15,10 +15,148 @@
             </div>
         </figure>
     </div>
-    <div>
-        <h2>Bienvenue</h2>
-        <h1>a CoffMulhouse</h1>
+    <div class="infoResto">
+        <h1 class="infoRestoTitle"><span class="bienvenue">Bienvenue</span> a CoffMulhouse</h1>
         <h3>le meilleure café de Mulhouse</h3>
+        <div class="articleEtImage">
+            <article class="articleResto">
+                <p>Nous sommes un petit café positionné 13 avenue boulevard à Mulhouse on est  ouvert 7 jours sur 7 de 9h00 a 18h00, vous pouvez aussi bien vous faire livré que prendre un café sur place ou en click and collect.</p>
+            </article>
+            <aside class="asideHomePage">
+                <figure class="slider2Figure">
+                    <img src="{{ asset('Img/devant.jpg')}}" alt="devanture du bistro" class="slide2">
+                    <img src="{{ asset('Img/interieur.jpg')}}" alt="intérieur du bistro" class="slide2">
+                    <img src="{{ asset('Img/intereur2.jpg')}}" alt="intérieur du bistro" class="slide2"> 
+                    <img src="{{ asset('Img/interieur3.jpg')}}" alt="intérieur du bistro" class="slide2">
+                    <div class="slider2Button">
+                        <button class="slider2Boutton" id="prevButton"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+                        <button class="slider2Boutton" id="nextButton"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
+                    </div>
+                </figure>
+            </aside>
+        </div>
+    </div>
+    <div class="cardContainer">
+        <h2>Nouveautés</h2>
+        <div class="sousCardContainer">
+            {% for article in articles %}
+                <a href="" class="cardLink">
+                    <div class="card">
+                        <figure class="figureCard">
+                            <img src="{{ asset(article.image)}}" alt="">
+                        </figure>
+                        <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
+                        <h5>Fabriquer en {{ article.origine }}</h5>
+                        {% for moyenne in moyennes %}
+                            {% if moyenne.article_id == article.id %}
+                                {% if moyenne.moyenne_note == 5 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 4 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 3 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 2 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div> 
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="cardContainer">
+        <h2>Meilleures ventes</h2>
+        <div class="sousCardContainer">
+            {% for article in articles %}
+                <a href="" class="cardLink">
+                    <div class="card">
+                        <figure class="figureCard">
+                            <img src="{{ asset(article.image)}}" alt="">
+                        </figure>
+                        <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
+                        <h5>Fabriquer en {{ article.origine }}</h5>
+                        {% for moyenne in moyennes %}
+                            {% if moyenne.article_id == article.id %}
+                                {% if moyenne.moyenne_note == 5 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 4 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 3 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 2 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div> 
+                </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}
