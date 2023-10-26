@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,16 @@ class Commande
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     private ?User $client = null;
+
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: CommandeArticle::class)]
+    private Collection $commandeArticles;
+
+
+
+    public function __construct()
+    {
+        $this->commandeArticles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,4 +150,38 @@ class Commande
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CommandeArticle>
+     */
+    public function getCommandeArticles(): Collection
+    {
+        return $this->commandeArticles;
+    }
+
+    public function addCommandeArticle(CommandeArticle $commandeArticle): static
+    {
+        if (!$this->commandeArticles->contains($commandeArticle)) {
+            $this->commandeArticles->add($commandeArticle);
+            $commandeArticle->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeArticle(CommandeArticle $commandeArticle): static
+    {
+        if ($this->commandeArticles->removeElement($commandeArticle)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeArticle->getCommande() === $this) {
+                $commandeArticle->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
+
+    
 }

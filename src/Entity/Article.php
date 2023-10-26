@@ -51,10 +51,18 @@ class Article
     #[ORM\ManyToMany(targetEntity: Avis::class, inversedBy: 'articles')]
     private Collection $avis;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: CommandeArticle::class)]
+    private Collection $commandeArticles;
+
+ 
+
+
+
     public function __construct()
     {
         $this->Tag = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->commandeArticles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,5 +237,37 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, CommandeArticle>
+     */
+    public function getCommandeArticles(): Collection
+    {
+        return $this->commandeArticles;
+    }
+
+    public function addCommandeArticle(CommandeArticle $commandeArticle): static
+    {
+        if (!$this->commandeArticles->contains($commandeArticle)) {
+            $this->commandeArticles->add($commandeArticle);
+            $commandeArticle->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeArticle(CommandeArticle $commandeArticle): static
+    {
+        if ($this->commandeArticles->removeElement($commandeArticle)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeArticle->getArticle() === $this) {
+                $commandeArticle->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
 }

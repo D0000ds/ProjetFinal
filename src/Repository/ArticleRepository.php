@@ -30,9 +30,25 @@ class ArticleRepository extends ServiceEntityRepository
             ->from('App\Entity\Article', 'a')
             ->join('a.avis', 'av')
             ->groupBy('a.id')
-            ->setMaxResults(5)
             ->getQuery();
 
+        $results = $query->getResult();
+
+        return $results;
+    }
+
+    public function meilleuresVentes(){
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
+
+        $query = $queryBuilder
+        ->select('a.libelle,a.id,a.image,(a.origine) as origine, COUNT(ca.article) as nbDeVentes')
+        ->from('App\Entity\CommandeArticle', 'ca')
+        ->join('ca.article', 'a')
+        ->groupBy('a.id')
+        ->orderBy('nbDeVentes', 'DESC')
+        ->setMaxResults(5)
+        ->getQuery();
         $results = $query->getResult();
 
         return $results;

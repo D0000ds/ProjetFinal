@@ -43,7 +43,7 @@
                 <a href="" class="cardLink">
                     <div class="card">
                         <figure class="figureCard">
-                            <img src="{{ asset(article.image)}}" alt="">
+                            <img src="{{ asset(article.image)}}" alt="{{ article.libelle}}">
                         </figure>
                         <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
                         <h5>Fabriquer en {{ article.origine }}</h5>
@@ -100,16 +100,20 @@
     <div class="cardContainer">
         <h2>Meilleures ventes</h2>
         <div class="sousCardContainer">
-            {% for article in articles %}
+            {% for MeilleureArticle in MeilleuresArticles %}
                 <a href="" class="cardLink">
                     <div class="card">
                         <figure class="figureCard">
-                            <img src="{{ asset(article.image)}}" alt="">
+                            <img src="{{ asset(MeilleureArticle.image)}}" alt="{{MeilleureArticle.libelle}}">
                         </figure>
-                        <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
-                        <h5>Fabriquer en {{ article.origine }}</h5>
+                        <h4 class="cardArticleTitle">{{ MeilleureArticle.libelle}}</h4>
+                        {% for origine in origines %}
+                            {% if origine.id ==  MeilleureArticle.origine %}
+                                <h5>Fabriquer en {{origine.pays}}</h5>
+                            {% endif %}
+                        {% endfor %}
                         {% for moyenne in moyennes %}
-                            {% if moyenne.article_id == article.id %}
+                            {% if moyenne.article_id == MeilleureArticle.id %}
                                 {% if moyenne.moyenne_note == 5 %}
                                     <div class="rating">
                                         <i class="fa-solid fa-star" style="color: #EAC696;"></i>
