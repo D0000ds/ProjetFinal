@@ -30,6 +30,7 @@ class ArticleRepository extends ServiceEntityRepository
             ->from('App\Entity\Article', 'a')
             ->join('a.avis', 'av')
             ->groupBy('a.id')
+            ->setMaxResults(5)
             ->getQuery();
 
         $results = $query->getResult();

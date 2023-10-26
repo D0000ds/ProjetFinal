@@ -11,23 +11,25 @@
     </head>
     <body>
         <header>
-            <nav>
-                <figure>
-                    <img src="" alt="logo">
+            <nav class="nav">
+                <figure class="logo">
+                    <a href="{{ path('app_home')}}">
+                        <img src="{{ asset('Img/logo.png')}}" alt="logo">
+                    </a>
                 </figure>
-                <ul>
+                <ul class="ul">
                     <li><a href="">CAFÉES MOULUES</a></li>
                     <li><a href="">CAFÉS EN GRAINS</a></li>
                     <li><a href="">CAFÉS DOSSESTES</a></li>
                     <li><a href="">CAFÉS CAPSULES</a></li>
                 </ul>
-                <div>
+                <div class="connexion">
                     <a href="">CONNEXION</a>
                     <span>/</span>
                     <a href="">INSCRIPTION</a>
                 </div>
-                <div>
-                    <a href="">card</a>
+                <div class="cart">
+                    <a href=""><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
                 </div>
             </nav>
         </header>
