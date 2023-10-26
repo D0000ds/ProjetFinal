@@ -40,7 +40,7 @@
         <h2>Nouveautés</h2>
         <div class="sousCardContainer">
             {% for article in articles %}
-                <a href="" class="cardLink">
+                <a href="{{ path('detail_article', {'id': article.id})}}" class="cardLink">
                     <div class="card">
                         <figure class="figureCard">
                             <img src="{{ asset(article.image)}}" alt="{{ article.libelle}}">
@@ -101,7 +101,7 @@
         <h2>Meilleures ventes</h2>
         <div class="sousCardContainer">
             {% for MeilleureArticle in MeilleuresArticles %}
-                <a href="" class="cardLink">
+                <a href="{{ path('detail_article', {'id': MeilleureArticle.id})}}" class="cardLink">
                     <div class="card">
                         <figure class="figureCard">
                             <img src="{{ asset(MeilleureArticle.image)}}" alt="{{MeilleureArticle.libelle}}">

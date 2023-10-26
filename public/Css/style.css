@@ -116,7 +116,7 @@
     justify-content: center;
     align-items: center;
 }
-
+/* *********************************************HOMEPAGE************************************************* */
 .container{
     width: 100%;
     display: flex;
@@ -300,4 +300,50 @@
 .rating{
     padding-top: 20%;
     font-size: 20px;
+}
+/* *************************************DETAIL ARTICLE******************************************* */
+.detailSousContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.detailImg img{
+    width: 550px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.achat{
+    display: flex;
+    flex-direction: column;
+    border: #65451F solid 2px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 10%;
+}
+
+.btnAddPanier{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #65451F;
+    border: #65451F solid 2px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    width: 90%;
+    height: 35px;
+    border-radius: 30px;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+    outline: none;
+}
+
+.btnAddPanier:hover{
+    box-shadow: inset 200px 0 0 0 white;
+    color: #65451F;
 }
