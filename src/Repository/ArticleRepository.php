@@ -42,13 +42,14 @@ class ArticleRepository extends ServiceEntityRepository
         $queryBuilder = $entityManager->createQueryBuilder();
 
         $query = $queryBuilder
-        ->select('a.libelle,a.id,a.image,(a.origine) as origine, COUNT(ca.article) as nbDeVentes')
-        ->from('App\Entity\CommandeArticle', 'ca')
-        ->join('ca.article', 'a')
-        ->groupBy('a.id')
-        ->orderBy('nbDeVentes', 'DESC')
-        ->setMaxResults(5)
-        ->getQuery();
+            ->select('a.libelle,a.id,a.image,(a.origine) as origine, COUNT(ca.article) as nbDeVentes')
+            ->from('App\Entity\CommandeArticle', 'ca')
+            ->join('ca.article', 'a')
+            ->groupBy('a.id')
+            ->orderBy('nbDeVentes', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery();
+        
         $results = $query->getResult();
 
         return $results;

@@ -306,7 +306,7 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 
@@ -323,6 +323,15 @@
     object-fit: cover;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.detailImg{
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .achat{
@@ -374,7 +383,165 @@
     text-decoration: none;
 }
 
+.note{
+    padding-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 35px;
+}
+
+.avisLink {
+    color: #1C62D7;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.decription{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.descriptifDetaille{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 20px;
+    margin-bottom: 2%;
+}
+
+.titleDescriptif{
+    text-align: center;
+    background-color: #EAC696;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 20px 0px 0px;
+}
+
+.containerDescriptif{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.sousContainerDescriptif {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px 50px;
+    font-size: 19px;
+}
+
+.sousContainerDescriptif span {
+    padding: 10px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.infoDescriptif{
+    width: 50%;
+    background-color: #C8AE7D;
+}
+
+.repDescriptif {
+    width: 50%;
+    background-color: #EAC696;
+}
+
+.btnVoirPlus{
+    background-color: #765827;
+    border: #765827 solid 2px;
+    color: white;
+    width: 150px;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+    margin-bottom: 1%;
+    outline: none;
+}
+
+.cache {
+    display: none;
+}
+
+.affiche {
+    display: flex;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+  
+  /* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+  
+  /* Add Animation */
+.modal-content {  
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+  
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+  
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+  
+  /* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+  
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .btnAddPanier:hover{
     box-shadow: inset 200px 0 0 0 white;
     color: #765827;
+}
+
+.btnVoirPlus:hover{
+    box-shadow: inset 200px 0 0 0 white;
+    color: #765827;
+}
+
+.detailImg img:hover{
+    opacity: 0.9;
 }

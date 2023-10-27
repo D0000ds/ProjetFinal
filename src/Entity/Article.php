@@ -268,6 +268,8 @@ class Article
         return $this;
     }
 
-   
+   public function __toString(){
+    return "test article";
+   }
 
 }

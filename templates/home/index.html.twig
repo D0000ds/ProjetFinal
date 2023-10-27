@@ -48,7 +48,9 @@
                         <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
                         <h5>Fabriquer en {{ article.origine }}</h5>
                         {% for moyenne in moyennes %}
+                            {# Système de vérification si c'est le bon article #}
                             {% if moyenne.article_id == article.id %}
+                            {# Système d'affichage d'étoile #}
                                 {% if moyenne.moyenne_note == 5 %}
                                     <div class="rating">
                                         <i class="fa-solid fa-star" style="color: #EAC696;"></i>
@@ -113,7 +115,9 @@
                             {% endif %}
                         {% endfor %}
                         {% for moyenne in moyennes %}
+                            {# Système de vérification si c'est le bon article #}
                             {% if moyenne.article_id == MeilleureArticle.id %}
+                            {# Système d'affichage d'étoile #}
                                 {% if moyenne.moyenne_note == 5 %}
                                     <div class="rating">
                                         <i class="fa-solid fa-star" style="color: #EAC696;"></i>

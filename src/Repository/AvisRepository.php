@@ -21,28 +21,20 @@ class AvisRepository extends ServiceEntityRepository
         parent::__construct($registry, Avis::class);
     }
 
-//    /**
-//     * @return Avis[] Returns an array of Avis objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function nbAvisEtCommentaire($id){
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
 
-//    public function findOneBySomeField($value): ?Avis
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $queryBuilder
+            ->select('COUNT(av.id) AS nbAvis, COUNT(av.commentaire) AS nbCommentaire')
+            ->from('App\Entity\Article', 'a')
+            ->join('a.avis', 'av')
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+
+        $result = $query->getResult();
+
+        return $result;
+    }
 }

@@ -7,12 +7,69 @@
     <div class="detailSousContainer">
         <div class="imageArticle">
             <figure class="detailImg">
-                <img src="{{ asset(article.image)}}" alt="{{article.libelle}}">
+                <img src="{{ asset(article.image)}}" alt="{{article.libelle}}" id="myImg">
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                </div>
+                <div class="note">
+                    {% for moyenne in moyennes %}
+                        {# Système de vérification si c'est le bon article #}
+                        {% if moyenne.article_id == article.id %}
+                            {# Système d'affichage d'étoile #}
+                            {% if moyenne.moyenne_note == 5 %}
+                                <div>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% elseif moyenne.moyenne_note >= 4 %}
+                                <div>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% elseif moyenne.moyenne_note >= 3 %}
+                                <div>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% elseif moyenne.moyenne_note >= 2 %}
+                                <div>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for nbAvisCom in nbAvisEtCom %}
+                        <a href="" class="avisLink">{{nbAvisCom.nbAvis}} avis et {{nbAvisCom.nbCommentaire}} commentaires</a>
+                        
+                    {% endfor %}
+                </div>
             </figure>
             <article class="detaiArticle">
                 <h1>{{article.libelle}}</h1>
                 <p>{{article.description}}</p>
-                <a href="" class="descriptif">Descriptif détaillé</a>
+                <a href="#decpritifDetaille" class="descriptif">Descriptif détaillé</a>
             </article>
         </div>
         <div class="achat">
@@ -35,7 +92,142 @@
             <a href="" class="btnAddPanier btn1">Ajouter au panier</a>
         </div>
     </div>
-    <div>
+    <div class="cardContainer">
+        <h2>Produits similaires</h2>
+        <div class="sousCardContainer">
+            {% for produitSimilaire in produitSimilaires %}
+                <a href="{{ path('detail_article', {'id': produitSimilaire.id})}}" class="cardLink">
+                    <div class="card">
+                        <figure class="figureCard">
+                            <img src="{{ asset(produitSimilaire.image)}}" alt="{{produitSimilaire.libelle}}">
+                        </figure>
+                        <h4 class="cardArticleTitle">{{ produitSimilaire.libelle}}</h4>
+                        <h5>Fabriquer en {{produitSimilaire.origine.pays}}</h5>
+                        {% for moyenne in moyennes %}
+                            {# Système de vérification si c'est le bon article #}
+                            {% if moyenne.article_id == produitSimilaire.id %}
+                            {# Système d'affichage d'étoile #}
+                                {% if moyenne.moyenne_note == 5 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 4 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 3 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 2 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div> 
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="decription">
+        <div id="decpritifDetaille" class="descriptifDetaille">
+            <div class="titleDescriptif">
+                <h2>Descriptif détaillé</h2>
+            </div>
+            <div class="containerDescriptif">
+                <div class="sousContainerDescriptif">
+                    <div class="infoDescriptif">
+                        <span>Poids</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.poids}} g</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Libellé</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.libelle}}</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Catégorie</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.categorie.libelle}}</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Origine</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.origine.pays}}</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Marque</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.marque}}</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Prix</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.prix}} €</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Conservation</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.conservation}} mois</span>
+                    </div>
+                </div>
+                <div class="sousContainerDescriptif cache">
+                    <div class="infoDescriptif">
+                        <span>Quantité</span>
+                    </div>
+                    <div class="repDescriptif">
+                        <span> {{article.qte}}</span>
+                    </div>
+                </div>
+                <button class="btnVoirPlus" id="bouton">Voir plus</button>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
