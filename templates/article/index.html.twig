@@ -3,18 +3,20 @@
 {% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
-<div>
+<div class="detailContainer">
     <div class="detailSousContainer">
-        <figure class="detailImg">
-            <img src="{{ asset(article.image)}}" alt="{{article.libelle}}">
-        </figure>
-        <article>
-            <h1>{{article.libelle}}</h1>
-            <p>{{article.description}}</p>
-            <a href="">Descriptif détaillé</a>
-        </article>
+        <div class="imageArticle">
+            <figure class="detailImg">
+                <img src="{{ asset(article.image)}}" alt="{{article.libelle}}">
+            </figure>
+            <article class="detaiArticle">
+                <h1>{{article.libelle}}</h1>
+                <p>{{article.description}}</p>
+                <a href="" class="descriptif">Descriptif détaillé</a>
+            </article>
+        </div>
         <div class="achat">
-            <span>{{article.prix}} €</span>
+            <span class="prix">{{article.prix}} €</span>
             <div>
                 <span>quantité</span>
                 <select name="">
@@ -32,6 +34,8 @@
             </div>
             <a href="" class="btnAddPanier btn1">Ajouter au panier</a>
         </div>
+    </div>
+    <div>
     </div>
 </div>
 {% endblock %}
