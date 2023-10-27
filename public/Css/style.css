@@ -472,22 +472,20 @@
     display: flex;
 }
 
-/* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
 }
-  
-  /* Modal Content (image) */
+
 .modal-content {
     margin: auto;
     display: block;
@@ -495,8 +493,6 @@
     max-width: 700px;
 }
 
-  
-  /* Add Animation */
 .modal-content {  
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
@@ -513,8 +509,7 @@
     from {transform:scale(0)} 
     to {transform:scale(1)}
 }
-  
-  /* The Close Button */
+
 .close {
     position: absolute;
     top: 15px;
@@ -524,7 +519,7 @@
     font-weight: bold;
     transition: 0.3s;
 }
-  
+
 .close:hover,
 .close:focus {
     color: #bbb;
@@ -545,3 +540,45 @@
 .detailImg img:hover{
     opacity: 0.9;
 }
+/* ********************************************AVIS ET COMMENTAIRE PAGE******************************************************** */
+.commentaireContainer{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    width: 62%;
+}
+
+.commentaireContainerTitle {
+    margin-bottom: 2%;
+}
+
+.commentaireCard {
+    width: 100%;
+    background-color: #F4F4F4;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-bottom: 2%;
+}
+
+.noteAvisPage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.commentaire{
+    display: flex;
+}
+
+.avisPageStar {
+    font-size: 23px;
+}
+
+.date{
+    display: flex;
+    justify-content: end;
+}
+  

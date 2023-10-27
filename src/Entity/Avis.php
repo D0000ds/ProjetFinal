@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AvisRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
@@ -26,6 +27,9 @@ class Avis
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?User $client = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $datePost = null;
 
     public function __construct()
     {
@@ -96,6 +100,18 @@ class Avis
     public function setClient(?User $client): static
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getDatePost(): ?\DateTimeInterface
+    {
+        return $this->datePost;
+    }
+
+    public function setDatePost(\DateTimeInterface $datePost): static
+    {
+        $this->datePost = $datePost;
 
         return $this;
     }

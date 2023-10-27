@@ -61,7 +61,7 @@
                         {% endif %}
                     {% endfor %}
                     {% for nbAvisCom in nbAvisEtCom %}
-                        <a href="" class="avisLink">{{nbAvisCom.nbAvis}} avis et {{nbAvisCom.nbCommentaire}} commentaires</a>
+                        <a href="{{ path('app_avis', {'id': article.id})}}" class="avisLink">{{nbAvisCom.nbAvis}} avis et {{nbAvisCom.nbCommentaire}} commentaires</a>
                         
                     {% endfor %}
                 </div>

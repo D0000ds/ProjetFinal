@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AvisController!{% endblock %}
+
+{% block body %}
+<div class="detailContainer">
+    <div class="detailSousContainer">
+        <figure class="detailImg">
+            <img src="{{ asset(article.image)}}" alt="{{article.libelle}}">
+            <div class="note">
+                {% for moyenne in moyennes %}
+                    {# Système de vérification si c'est le bon article #}
+                        {% if moyenne.article_id == article.id %}
+                         {# Système d'affichage d'étoile #}
+                        {% if moyenne.moyenne_note == 5 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenne.moyenne_note >= 4 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenne.moyenne_note >= 3 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenne.moyenne_note >= 2 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% else %}
+                           <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </figure>
+        <div class="commentaireContainer">
+            <h1 class="commentaireContainerTitle">Avis et commentaires de {{article.libelle}}</h1>
+            {# permet d'afficher un text si un article a pas d'avis #}
+            {% if article.avis is empty %}
+                <p>Cette article n'a pas encore de note et de commentaire.</p>
+            {% endif %}
+            {% for commentaires in article.avis %}
+                <div class="commentaireCard">
+                    <div class="noteAvisPage">
+                        {# Système d'affichage d'étoile #}
+                        {% if commentaires.note == 5 %}
+                            <div class="avisPageStar">
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif commentaires.note >= 4 %}
+                            <div class="avisPageStar">
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif commentaires.note >= 3 %}
+                            <div class="avisPageStar">
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif commentaires.note >= 2 %}
+                            <div class="avisPageStar">
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% else %}
+                            <div class="avisPageStar">
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% endif %}
+                            <span>de la part d'un utilisateur anonyme</span>
+                    </div>
+                    <div class="commentaire">
+                        {% if commentaires.commentaire == null %}
+                            <p>Cette personne n'a pas laissé de commentaire.</p>
+                        {% else %}
+                            <p>{{commentaires.commentaire}}</p>
+                        {% endif %}
+                    </div>
+                    <div class="date">
+                        <span>le {{commentaires.datePost | date("d/m/Y")}}</span>
+                    </div>
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
