@@ -24,6 +24,9 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Article::class)]
     private Collection $articles;
 
+    #[ORM\Column(length: 10)]
+    private ?string $code = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -84,6 +87,18 @@ class Categorie
                 $article->setCategorie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): static
+    {
+        $this->code = $code;
 
         return $this;
     }

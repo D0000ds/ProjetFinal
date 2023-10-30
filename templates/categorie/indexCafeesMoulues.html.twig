@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="sliderContainer">
+        <figure class="sliderFigure">
+            {% for categorie in categories %}
+                <img src="{{ asset(categorie.image)}}" alt="{{ categorie.image }}" class="slide">
+            {% endfor %}
+            <div class="sliderButton">
+                <button class="sliderBoutton" onclick="goPrev()"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+                <button class="sliderBoutton" onclick="goNext()"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
+            </div>
+        </figure>
+    </div>
+    <div class="cardContainer">
+        <h2>Listes des cafés en capsules</h2>
+        <div class="sousCardContainerCategorie">
+            {% for categorie in categories %}
+                <div class="cardCategorie">
+                    <a href="" class="cardLinkC">
+                        <figure class="figureCardCategorie">
+                            <img src="{{ asset(categorie.image)}}" alt="{{ categorie.image }}">
+                        </figure>
+                        <h4 class="cardArticleTitle">{{ categorie.libelle}}</h4>
+                        {# Systeme permettant d'afficher le nombre d'article par catégorie #}
+                        {% for nbArticleCategorie in nbArticleCategories %}
+                            {% if nbArticleCategorie is not null %}
+                                {% if nbArticleCategorie.categorie_id == categorie.id %}
+                                    <h5>{{nbArticleCategorie.nbArticleCategorie}} produits dans cette catégorie</h5>   
+                                {% endif %}
+                            {% else %}
+                                <h5>Il n'y a aucun produit dans cette catégorie</h5>
+                            {% endif %}
+                        {% endfor %}
+                    </a>
+                </div> 
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

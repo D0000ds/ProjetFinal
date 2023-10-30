@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="sliderContainer">
+        <figure class="sliderFigure">
+            <img src="" alt="" class="slide">
+            <div class="sliderButton">
+                <button class="sliderBoutton" onclick="goPrev()"><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i></button>
+                <button class="sliderBoutton" onclick="goNext()"><i class="fa-solid fa-arrow-right" style="color: #ffffff;"></i></button>
+            </div>
+        </figure>
+    </div>
+    <div class="cardContainer">
+        <h2>Tout les cafés de la catégorie {{categorie.libelle}} </h2>
+        <div class="sousCardContainer">
+            {% for article in categorie.articles %}
+                <a href="{{ path('detail_article', {'id': article.id})}}" class="cardLink">
+                    <div class="card">
+                        <figure class="figureCard">
+                            <img src="{{ asset(article.image)}}" alt="{{ article.libelle}}">
+                        </figure>
+                        <h4 class="cardArticleTitle">{{ article.libelle}}</h4>
+                        <h5>Fabriquer en {{ article.origine }}</h5>
+                        {% for moyenne in moyennes %}
+                            {# Système de vérification si c'est le bon article #}
+                            {% if moyenne.article_id == article.id %}
+                            {# Système d'affichage d'étoile #}
+                                {% if moyenne.moyenne_note == 5 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 4 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 3 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% elseif moyenne.moyenne_note >= 2 %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="rating">
+                                        <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                        <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </div> 
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -21,28 +21,21 @@ class CategorieRepository extends ServiceEntityRepository
         parent::__construct($registry, Categorie::class);
     }
 
-//    /**
-//     * @return Categorie[] Returns an array of Categorie objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function nbArticleParCategorie()
+    {
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
 
-//    public function findOneBySomeField($value): ?Categorie
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $queryBuilder
+            ->select('c.id AS categorie_id, c.libelle AS categorie_nom, COUNT(a.categorie) AS nbArticleCategorie')
+            ->from('App\Entity\Categorie', 'c')
+            ->leftJoin('c.articles', 'a')
+            ->groupBy('c.id, c.libelle')
+            ->getQuery();
+    
+
+        $result = $query->getResult();
+
+        return $result;
+    }
 }
