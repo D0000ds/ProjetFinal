@@ -72,4 +72,40 @@ class CategorieController extends AbstractController
             'moyennes' =>  $moyennesNote,
         ]);
     }
+
+    #[Route('/categorie/cafes dossetes/{id}', name: 'detail_categorie_cafes_dossetes')]
+    public function detailCafesDossetes($id, EntityManagerInterface $entityManager)
+    {
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        return $this->render('categorie/detailCafesDossetes.html.twig', [
+            'categorie' => $categorie,
+            'moyennes' =>  $moyennesNote,
+        ]);
+    }
+
+    #[Route('/categorie/cafes en grains/{id}', name: 'detail_categorie_cafes_grains')]
+    public function detailCafesCafesEnGrains($id, EntityManagerInterface $entityManager)
+    {
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        return $this->render('categorie/detailCafesEnGrains.html.twig', [
+            'categorie' => $categorie,
+            'moyennes' =>  $moyennesNote,
+        ]);
+    }
+
+    #[Route('/categorie/cafes moulues/{id}', name: 'detail_categorie_cafes_moulues')]
+    public function detailCafesCafesMoulues($id, EntityManagerInterface $entityManager)
+    {
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        return $this->render('categorie/detailCafesMoulues.html.twig', [
+            'categorie' => $categorie,
+            'moyennes' =>  $moyennesNote,
+        ]);
+    }
 }

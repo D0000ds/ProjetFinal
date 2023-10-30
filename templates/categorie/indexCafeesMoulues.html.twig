@@ -20,7 +20,7 @@
         <div class="sousCardContainerCategorie">
             {% for categorie in categories %}
                 <div class="cardCategorie">
-                    <a href="" class="cardLinkC">
+                    <a href="{{ path('detail_categorie_cafes_moulues', {'id': categorie.id})}}" class="cardLinkC">
                         <figure class="figureCardCategorie">
                             <img src="{{ asset(categorie.image)}}" alt="{{ categorie.image }}">
                         </figure>
