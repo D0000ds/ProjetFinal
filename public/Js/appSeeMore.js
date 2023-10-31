@@ -20,7 +20,7 @@ function toggleDisplay() {
       elements[i].classList.add("cache");
       // Ajoute la classe "cache" pour masquer l'élément
       document.getElementById("bouton").innerText = "Voir plus";
-      // Met à jour le texte du bouton pour afficher "Voir plus"
+      // Met à jour le texte du bouton pour afficher "Voir plus"S
     }
   }
 }

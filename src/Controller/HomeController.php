@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Origine;
+use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,6 @@ class HomeController extends AbstractController
         $bestArticles = $entityManager->getRepository(Article::class)->meilleuresVentes();
         $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
         $origines = $entityManager->getRepository(Origine::class)->findAll();
-
 
         return $this->render('home/index.html.twig', [
             'articles' => $articles,
