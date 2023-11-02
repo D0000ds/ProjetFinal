@@ -664,6 +664,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
     width: 300px;
     height: 500px;
     border: #765827 solid 2px;
@@ -749,4 +750,15 @@
 .btn:hover{
     box-shadow: inset 250px 0 0 0 white;
     color: #765827;
+}
+/* *******************************************CONNEXION PAGE*********************************************************** */
+.mdpOublier{
+    padding-top: 5%;
+    text-decoration: none;
+    color: #1C62D7;
+    font-size: 13px;
+}
+
+.resetPasswordInfo{
+    text-align: center;
 }

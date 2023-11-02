@@ -35,8 +35,14 @@
                 <div>
                     <input type="password" name="password" id="inputPassword" class="form" autocomplete="current-password" placeholder="Mot de passe" required>
                 </div>
+                <a href="{{ path('app_forgot_password_request')}}" class="mdpOublier">Mot de passe oublié ?</a>
+                <div>
+                    <label>
+                        <input type="checkbox" name="_remember_me" id="">Se souvenir de moi
+                    </label>
+                </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button class="btn" type="submit">Sign in</button>
+                <button class="btn" type="submit">Connexion</button>
             </form>
         </div>
     </div>

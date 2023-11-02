@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Reset your password{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
+    {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert" role="alert">{{ flash_error }}</div>
     {% endfor %}
     <div class="registerContainer">
@@ -18,18 +18,17 @@
                 </svg>
             </div>
             <div class="registerForm">
-                <h1>Inscription</h1>
+                <h1>Réinitialiser votre mot de passe</h1>
             
-                {{ form_start(registrationForm, {'attr':{ 'class': 'formRegister'}}) }}
-                    {{ form_row(registrationForm.email) }}
-                    {{ form_row(registrationForm.plainPassword) }}
-                    <div class="formCheck">
-                        <label>Vous acceptez les conditions générales de CoffMulhouse</label>
-                        {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_start(requestForm, {'attr':{ 'class': 'formRegister'}}) }}
+                    {{ form_row(requestForm.email) }}
+                    <div class="resetPasswordInfo">
+                        <small>
+                            Saisissez votre adresse électronique et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                        </small>
                     </div>
-            
-                    <button type="submit" class="btn">Inscription</button>
-                {{ form_end(registrationForm) }}
+                    <button class="btn">Envoyer l'email de réinitialisation</button>
+                {{ form_end(requestForm) }}
             </div>
         </div>
     </div>

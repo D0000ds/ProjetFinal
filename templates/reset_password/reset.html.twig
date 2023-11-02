@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+<div class="registerContainer">
+    <div class="sousRegisterContainer">
+        <div class="svgRegister">
+            <svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+                <g transform="translate(407.43748106249615 307.93449843930046)">
+                    <path d="M130.9 -129.7C177.9 -83.9 230 -42 244.3 14.4C258.7 70.7 235.4 141.4 188.4 178.6C141.4 215.8 70.7 219.4 4.7 214.7C-61.3 209.9 -122.6 196.9 -147.6 159.7C-172.6 122.6 -161.3 61.3 -157.9 3.4C-154.5 -54.4 -158.9 -108.9 -133.9 -154.7C-108.9 -200.6 -54.4 -237.8 -6.2 -231.5C42 -225.3 83.9 -175.6 130.9 -129.7" 
+                    fill="#65451F">
+                    </path>
+                </g>
+            </svg>
+        </div>
+        <div class="registerForm">
+            <h1>Réinitialiser votre mot de passe</h1>
+        
+            {{ form_start(resetForm, {'attr':{ 'class': 'formRegister'}}) }}
+                {{ form_row(resetForm.plainPassword) }}
+                <button class="btn">Réinitialiser le mot de passe</button>
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
