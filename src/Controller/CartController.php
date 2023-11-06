@@ -29,9 +29,13 @@ class CartController extends AbstractController
            ];
            $total += $article->getPrix() * $quantite;
         }
+        $lastData = end($data);
+
+
         return $this->render('cart/index.html.twig', [
             'data' => $data,
             'total' => $total,
+            'lastData' => $lastData,
         ]);
     }
 
@@ -59,11 +63,14 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
-        return $this->redirectToRoute('app_cart');
+
+        $route = $request->headers->get('referer');
+
+        return $this->redirect($route);
     }
 
     #[Route('/remove/{id}', name: 'remove_cart')]
-    public function remove($id, SessionInterface $session): Response
+    public function remove($id, SessionInterface $session,Request $request): Response
     {
         // on recupère le panier existant
         $panier = $session->get('panier', []);
@@ -78,11 +85,14 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
-        return $this->redirectToRoute('app_cart');
+
+        $route = $request->headers->get('referer');
+
+        return $this->redirect($route);
     }
 
     #[Route('/delete/{id}', name: 'delete_cart')]
-    public function delete($id, SessionInterface $session): Response
+    public function delete($id, SessionInterface $session, Request $request): Response
     {
         // on recupère le panier existant
         $panier = $session->get('panier', []);
@@ -93,13 +103,18 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
-        return $this->redirectToRoute('app_cart');
+
+        $route = $request->headers->get('referer');
+
+        return $this->redirect($route);
     }
 
     #[Route('/empty', name: 'empty_cart')]
-    public function empty(SessionInterface $session): Response
+    public function empty(SessionInterface $session, Request $request): Response
     {
         $session->remove('panier');
-        return $this->redirectToRoute('app_cart');
+        $route = $request->headers->get('referer');
+
+        return $this->redirect($route);
     }
 }

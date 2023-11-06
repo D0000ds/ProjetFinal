@@ -43,7 +43,39 @@
                     {% endif %}
                 </div>
                 <div class="cart">
-                    <a href="{{ path('app_cart')}}"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
+                    <div class="dropdown-cart">
+                        <a href="{{ path('app_cart')}}"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
+                        <div class="cart-dropdown-content">
+                            <a href="{{ path('app_cart')}}">
+                                {% if lastData is not empty %}
+                                    <span class="panierLastArt">Votre dernier article mis dans le panier:</span>
+                                    <div class="panierHover">
+                                        <figure class="panierHoverImg">
+                                            <img src="{{ lastData.article.image}}" alt="{{ lastData.article.libelle}}">
+                                        </figure>
+                                        <div class="panierHoverInfos">
+                                            <span>{{lastData.article.libelle}}</span>
+                                            <span>quantité: {{ lastData.quantite }}</span>
+                                        </div>
+                                        <div class="prixArticlePanierHover">
+                                            <span>{{ lastData.article.prix * lastData.quantite }} €</span>
+                                        </div>
+                                    </div>
+                                    <div class="panierHoverTotal">
+                                        <span class="panierLastArt">Nombre d'article dans le panier: {{ lastData | length }}</span>
+                                        <span class="panierLastArt">Total: {{total}}€</span>
+                                    </div>
+                                {% else %}
+                                    <div class="panierVide">
+                                        <span>Votre panier est vide</span>
+                                            <figure>
+                                                <img src="{{ asset('Img/bag.png')}}" alt="sad bag">
+                                            </figure>
+                                    </div>
+                                {% endif %}
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
