@@ -74,22 +74,24 @@
         </div>
         <div class="achat">
             <span class="prix">{{article.prix}} €</span>
-            <div>
-                <span>quantité</span>
-                <select name="">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-            </div>
-            <a href="" class="btnAddPanier">Ajouter au panier</a>
+            <form action="{{ path('add_cart', {id: article.id})}}" method="post">
+                <div>
+                    <span>quantité</span>
+                    <select name="selectQte">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </div>
+                <input type="submit" value="Ajouter au panier" class="btnAddPanier">
+            </form>
         </div>
     </div>
     <div class="cardContainer">

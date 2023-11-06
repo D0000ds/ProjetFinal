@@ -24,12 +24,26 @@
                     <li><a href="{{ path('app_categorie_cafes_capsules')}}">CAFÉS CAPSULES</a></li>
                 </ul>
                 <div class="connexion">
-                    <a href="{{ path('app_login')}}">CONNEXION</a>
-                    <span>/</span>
-                    <a href="{{ path('app_register')}}">INSCRIPTION</a>
+                    {% if app.user %}
+                        <div class="dropdown">
+                            <span>{{ app.user.email }}</span>
+                            <div class="dropdown-content">
+                                <a href="{{ path('app_user')}}">Profile</a>
+                                <a href="">Commande</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a href="">Panneau d'admin</a>
+                                {% endif %}
+                                <a href="{{ path('app_logout')}}">Déconnexion</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{{ path('app_login')}}">CONNEXION</a>
+                        <span>/</span>
+                        <a href="{{ path('app_register')}}">INSCRIPTION</a>
+                    {% endif %}
                 </div>
                 <div class="cart">
-                    <a href=""><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
+                    <a href="{{ path('app_cart')}}"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
                 </div>
             </nav>
         </header>

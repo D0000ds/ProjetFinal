@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+{% for commande in commandes %}
+    {% if commande.client.id == app.user.id %}
+        <span>{{ commande.nom }}</span>
+    {% endif %}
+{% endfor %}
+{% endblock %}

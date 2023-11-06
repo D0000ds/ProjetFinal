@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+<div class="detailContainer">
+    <div class="detailSousContainer">
+        <div class="listeArticlePanierContainer">
+            <h1>Détail de votre panier</h1>
+            {% for element in data %}
+                {% if element.quantite != 0 %}
+                    <div class="listeArticlePanier">
+                        <figure class="imgPanier">
+                            <img src="{{ element.article.image}}" alt="{{ element.article.libelle}}">
+                        </figure>
+                        <div class="middlePanier">
+                            <h2>{{ element.article.libelle }}</h2>
+                            <h4>quantité {{ element.quantite }}</h4>
+                            <div class="btnPanier">
+                                <a href="{{ path('add_cart', {id: element.article.id})}}" class="btnPanierPlus"><i class="fa-solid fa-plus"></i></a>
+                                <a href="{{ path('remove_cart', {id: element.article.id})}}" class="btnPanierLess"><i class="fa-solid fa-minus"></i></a>
+                                <a href="{{ path('delete_cart', {id: element.article.id})}}" class="btnPanierTrash"><i class="fa-solid fa-trash"></i></a>
+                            </div>
+                        </div>
+                        <div class="prixArticlePanier">
+                            <span>{{ element.article.prix * element.quantite }} €</span>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <h2>Votre panier est vide</h2>
+            {% endfor %}
+        </div>
+        <div class="achat">
+            <span class="prix"> {{ total }} €</span>
+            <a href="" class="btnAddPanier">Commander</a>
+            <a href="{{ path('empty_cart')}}" class="descriptif">vider le panier</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
