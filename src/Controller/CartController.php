@@ -29,13 +29,13 @@ class CartController extends AbstractController
            ];
            $total += $article->getPrix() * $quantite;
         }
-        $lastData = end($data);
+        // $lastData = end($data);
 
 
         return $this->render('cart/index.html.twig', [
             'data' => $data,
             'total' => $total,
-            'lastData' => $lastData,
+            // 'lastData' => $lastData,
         ]);
     }
 
