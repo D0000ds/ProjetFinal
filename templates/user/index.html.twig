@@ -3,8 +3,8 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
-{% for commande in commandes %}
-    {% if commande.client.id == app.user.id %}
+{% for client in clients %}
+    {% if client.id == app.user.id %}
         <div class="profileContainer">
             <aside class="profileAside">
                 <figure class="figureAsideProfile">
@@ -17,7 +17,7 @@
                     <span>Taux de satisfaction:</span>
                     <span></span>
                     <span>Nombre de commande:</span>
-                    <span></span>
+                    <span>{{ client.commandes | length }}</span>
                     <span>Argent dépensé:</span>
                     <span>€</span>
                 </div>
@@ -30,18 +30,25 @@
                     </div>
                     <div class="profileTextArea">
                         <div class="sousProfileTextArea">
-                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
-                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
-                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                            <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ client.email }}</textarea>
+                            {% if client.commandes is not empty %}
+                                {% for commande in client.commandes %}
+                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea"> {{ commande.nom }} </textarea>
+                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ commande.prenom }}</textarea>
+                                {% endfor %}
+                            {% else %}
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Nom</textarea>
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Prenom</textarea>
+                            {% endif %}
                             <div class="sousProfileTextAreaAdresse">
                                 <div class="sousProfileTextAreaAdresseTitre">
                                     <h4>Adresse principale</h4>
                                 </div>
-                                <div class="textAreaAdresse">
-                                    <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                                <div class="textAreaAdresse">        
+                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Adresse</textarea>
                                     <div class="duoTextArea">
-                                        <textarea name="" id="" cols="15" rows="1" class="textAreaLittle"></textarea>
-                                        <textarea name="" id="" cols="15" rows="1" class="textAreaLittle"></textarea>
+                                        <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Code postale</textarea>
+                                        <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Ville</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -52,9 +59,9 @@
                         </aside>
                     </div>
                 </div>
-                <a href="">Changer de mot de passe</a>
-                <a href="">Ajouter une adresse</a>
-                <a href="">Supprimer votre compte</a>
+                <a href="" class="btnMdp">Changer de mot de passe</a>
+                <a href="" class="btnAdresse">Ajouter une adresse</a>
+                <a href="" class="btnDel">Supprimer votre compte</a>
             </div>
         </div>
     {% endif %}

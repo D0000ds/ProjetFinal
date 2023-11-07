@@ -1197,6 +1197,48 @@ main{
     width: 5%;
 }
 
+.btnMdp {
+    display: flex;
+    justify-content: center;
+    background-color: #95BDFF;
+    border: #95BDFF solid 2px;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 1%;
+    transition: all 0.2s ease;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.btnAdresse{
+    display: flex;
+    justify-content: center;
+    background-color: #B5CB99;
+    border: #B5CB99 solid 2px;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 1%;
+    transition: all 0.2s ease;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.btnDel {
+    display: flex;
+    justify-content: center;
+    background-color: #FF8080;
+    border: #FF8080 solid 2px;
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 1%;
+    transition: all 0.2s ease;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
 .boutonAdresse:hover{
     box-shadow: inset 700px 0 0 0 white;
     color: #65451F;
@@ -1205,4 +1247,16 @@ main{
 .btnEdit:hover{
     box-shadow: inset 30px 0 0 0 white;
     color: #95BDFF;
+}
+
+.btnDel:active{
+    transform: scale(0.96);
+}
+
+.btnAdresse:active{
+    transform: scale(0.96);
+}
+
+.btnMdp:active{
+    transform: scale(0.96);
 }
