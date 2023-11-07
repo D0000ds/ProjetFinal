@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello ArticleController!{% endblock %}
-
 {% block body %}
+<div id="cartPopup" class="popUpAjoutPanier">
+    <span>Bien joué, l'article a été ajouté au panier.</span>
+</div>
 <div class="detailContainer">
     <div class="detailSousContainer">
         <div class="imageArticle">
@@ -90,7 +92,7 @@
                         <option value="10">10</option>
                     </select>
                 </div>
-                <input type="submit" value="Ajouter au panier" class="btnAddPanier">
+                <input type="submit" id="submit" value="Ajouter au panier" class="btnAddPanier" onclick="popUp()">
             </form>
         </div>
     </div>

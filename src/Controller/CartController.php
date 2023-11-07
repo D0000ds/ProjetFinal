@@ -29,13 +29,17 @@ class CartController extends AbstractController
            ];
            $total += $article->getPrix() * $quantite;
         }
-        // $lastData = end($data);
+        
+        $nbArticlePanier = count($data);
 
+        $lastData = end($data);
+        $session->set('lastData', $lastData);
+        $session->set('total', $total);
+        $session->set('nbArticlePanier', $nbArticlePanier);
 
         return $this->render('cart/index.html.twig', [
             'data' => $data,
             'total' => $total,
-            // 'lastData' => $lastData,
         ]);
     }
 
@@ -46,7 +50,6 @@ class CartController extends AbstractController
         $panier = $session->get('panier', []);
 
         $qte = $request->request->get('selectQte');
-
         // on ajoute le produit dans le panier sinon on l'incremente
         if($qte != null){
             if(empty($panier[$id])){
@@ -63,6 +66,7 @@ class CartController extends AbstractController
         }
 
         $session->set('panier', $panier);
+
 
         $route = $request->headers->get('referer');
 

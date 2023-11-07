@@ -5,7 +5,58 @@
 {% block body %}
 {% for commande in commandes %}
     {% if commande.client.id == app.user.id %}
-        <span>{{ commande.nom }}</span>
+        <div class="profileContainer">
+            <aside class="profileAside">
+                <figure class="figureAsideProfile">
+                    <img src="{{ asset('Img/boy.png')}}" alt="of an happy boy">
+                </figure>
+                <div class="profileInfos">
+                    <div class="profileInfosTitre">
+                        <h2>Information</h2>
+                    </div>
+                    <span>Taux de satisfaction:</span>
+                    <span></span>
+                    <span>Nombre de commande:</span>
+                    <span></span>
+                    <span>Argent dépensé:</span>
+                    <span>€</span>
+                </div>
+            </aside>
+            <div class="profileMain">
+                <h1>Profile</h1>
+                <div class="profileInfos">
+                    <div class="profileInfosTitre">
+                        <h2>Information personnel</h2>
+                    </div>
+                    <div class="profileTextArea">
+                        <div class="sousProfileTextArea">
+                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                            <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                            <div class="sousProfileTextAreaAdresse">
+                                <div class="sousProfileTextAreaAdresseTitre">
+                                    <h4>Adresse principale</h4>
+                                </div>
+                                <div class="textAreaAdresse">
+                                    <textarea name="" id="" cols="30" rows="1" class="textArea"></textarea>
+                                    <div class="duoTextArea">
+                                        <textarea name="" id="" cols="15" rows="1" class="textAreaLittle"></textarea>
+                                        <textarea name="" id="" cols="15" rows="1" class="textAreaLittle"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="boutonAdresse">Voir la liste des adresses</button>
+                        </div>
+                        <aside class="asideBtnEdit">
+                            <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
+                        </aside>
+                    </div>
+                </div>
+                <a href="">Changer de mot de passe</a>
+                <a href="">Ajouter une adresse</a>
+                <a href="">Supprimer votre compte</a>
+            </div>
+        </div>
     {% endif %}
 {% endfor %}
 {% endblock %}

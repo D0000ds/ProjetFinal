@@ -47,24 +47,23 @@
                         <a href="{{ path('app_cart')}}"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
                         <div class="cart-dropdown-content">
                             <a href="{{ path('app_cart')}}">
-                                {% if lastData is not empty %}
-                                {{ dump(lastData) }}
+                                {% if app.session.get('lastData') is not empty %}
                                     <span class="panierLastArt">Votre dernier article mis dans le panier:</span>
                                     <div class="panierHover">
                                         <figure class="panierHoverImg">
-                                            {# <img src="{{ lastData['article'].image }}" alt="{{ lastData.article.libelle}}"> #}
+                                            <img src="{{ asset(app.session.get('lastData').article.image) }}" alt="{{ app.session.get('lastData').article.libelle}}">
                                         </figure>
                                         <div class="panierHoverInfos">
-                                            {# <span>{{lastData.article.libelle}}</span> #}
-                                            {# <span>quantité: {{ lastData.quantite }}</span> #}
+                                            <span>{{app.session.get('lastData').article.libelle}}</span>
+                                            <span>quantité: {{ app.session.get('lastData').quantite }}</span>
                                         </div>
                                         <div class="prixArticlePanierHover">
-                                            {# <span>{{ lastData.article.prix * lastData.quantite }} €</span> #}
+                                            <span>{{ app.session.get('lastData').article.prix * app.session.get('lastData').quantite }} €</span>
                                         </div>
                                     </div>
                                     <div class="panierHoverTotal">
-                                        <span class="panierLastArt">Nombre d'article dans le panier: </span>
-                                        {# <span class="panierLastArt">Total: {{total}}€</span> #}
+                                        <span class="panierLastArt">Nombre d'article dans le panier: {{ app.session.get('nbArticlePanier') }}</span>
+                                        <span class="panierLastArt">Total: {{ app.session.get('total') }} €</span>
                                     </div>
                                 {% else %}
                                     <div class="panierVide">
@@ -80,20 +79,35 @@
                 </div>
             </nav>
         </header>
-        {% block body %}
-        {% endblock %}
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
         <footer class="footer">
-            <a href=""><span>Confidentialité et cookies |</span></a>
-            <a href=""><span>Gerer les cookies |</span></a>
-            <a href=""><span>Mentions légales |</span></a>
-            <a href=""><span>Nous contacter |</span></a>
-            <a href=""><span>S’abonner à la newsletter</span></a>
+            <div class="svgFooter">
+                <svg id="visual" viewBox="0 0 2500 700" width="2500" height="700" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+                    <path d="M0 484L37.8 487.2C75.7 490.3 151.3 496.7 227.2 497.7C303 498.7 379 494.3 454.8 486.5C530.7 478.7 606.3 467.3 682 466C757.7 464.7 833.3 473.3 909 484.8C984.7 496.3 1060.3 510.7 1136.2 507.2C1212 503.7 1288 482.3 1363.8 478C1439.7 473.7 1515.3 486.3 1591 498C1666.7 509.7 1742.3 520.3 1818 513.2C1893.7 506 1969.3 481 2045.2 473.7C2121 466.3 2197 476.7 2272.8 482.3C2348.7 488 2424.3 489 2462.2 489.5L2500 490L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#eac696"></path>
+                    <path d="M0 536L37.8 533C75.7 530 151.3 524 227.2 524.3C303 524.7 379 531.3 454.8 536.8C530.7 542.3 606.3 546.7 682 550.8C757.7 555 833.3 559 909 560C984.7 561 1060.3 559 1136.2 548.2C1212 537.3 1288 517.7 1363.8 517.3C1439.7 517 1515.3 536 1591 548.2C1666.7 560.3 1742.3 565.7 1818 562.2C1893.7 558.7 1969.3 546.3 2045.2 539.3C2121 532.3 2197 530.7 2272.8 526.7C2348.7 522.7 2424.3 516.3 2462.2 513.2L2500 510L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#ceab7c"></path>
+                    <path d="M0 546L37.8 553.3C75.7 560.7 151.3 575.3 227.2 572.5C303 569.7 379 549.3 454.8 546.7C530.7 544 606.3 559 682 563.7C757.7 568.3 833.3 562.7 909 566C984.7 569.3 1060.3 581.7 1136.2 577.7C1212 573.7 1288 553.3 1363.8 544.8C1439.7 536.3 1515.3 539.7 1591 540.2C1666.7 540.7 1742.3 538.3 1818 535.8C1893.7 533.3 1969.3 530.7 2045.2 530C2121 529.3 2197 530.7 2272.8 536.3C2348.7 542 2424.3 552 2462.2 557L2500 562L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#b39063"></path>
+                    <path d="M0 618L37.8 613.5C75.7 609 151.3 600 227.2 591.3C303 582.7 379 574.3 454.8 575.3C530.7 576.3 606.3 586.7 682 587.8C757.7 589 833.3 581 909 583.7C984.7 586.3 1060.3 599.7 1136.2 606.8C1212 614 1288 615 1363.8 607C1439.7 599 1515.3 582 1591 582.7C1666.7 583.3 1742.3 601.7 1818 611.8C1893.7 622 1969.3 624 2045.2 617C2121 610 2197 594 2272.8 585.5C2348.7 577 2424.3 576 2462.2 575.5L2500 575L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#99764b"></path>
+                    <path d="M0 603L37.8 607.3C75.7 611.7 151.3 620.3 227.2 625C303 629.7 379 630.3 454.8 631.5C530.7 632.7 606.3 634.3 682 635C757.7 635.7 833.3 635.3 909 633.7C984.7 632 1060.3 629 1136.2 625C1212 621 1288 616 1363.8 618C1439.7 620 1515.3 629 1591 627C1666.7 625 1742.3 612 1818 613.3C1893.7 614.7 1969.3 630.3 2045.2 632.3C2121 634.3 2197 622.7 2272.8 624.2C2348.7 625.7 2424.3 640.3 2462.2 647.7L2500 655L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#7f5d35"></path>
+                    <path d="M0 671L37.8 671C75.7 671 151.3 671 227.2 669.3C303 667.7 379 664.3 454.8 662.5C530.7 660.7 606.3 660.3 682 657.8C757.7 655.3 833.3 650.7 909 651.8C984.7 653 1060.3 660 1136.2 664.2C1212 668.3 1288 669.7 1363.8 668.2C1439.7 666.7 1515.3 662.3 1591 663C1666.7 663.7 1742.3 669.3 1818 668.3C1893.7 667.3 1969.3 659.7 2045.2 654.8C2121 650 2197 648 2272.8 649.3C2348.7 650.7 2424.3 655.3 2462.2 657.7L2500 660L2500 701L2462.2 701C2424.3 701 2348.7 701 2272.8 701C2197 701 2121 701 2045.2 701C1969.3 701 1893.7 701 1818 701C1742.3 701 1666.7 701 1591 701C1515.3 701 1439.7 701 1363.8 701C1288 701 1212 701 1136.2 701C1060.3 701 984.7 701 909 701C833.3 701 757.7 701 682 701C606.3 701 530.7 701 454.8 701C379 701 303 701 227.2 701C151.3 701 75.7 701 37.8 701L0 701Z" fill="#65451f"></path>
+                </svg>
+            </div>
+            <div class="information">
+                <a href=""><span>Confidentialité et cookies |</span></a>
+                <a href=""><span>Gerer les cookies |</span></a>
+                <a href=""><span>Mentions légales |</span></a>
+                <a href=""><span>Nous contacter |</span></a>
+                <a href=""><span>S’abonner à la newsletter</span></a>
+            </div>
         </footer>
         {% block javascripts %}
             <script src="{{ asset('Js/appSliders.js')}}"></script>
             <script src="https://kit.fontawesome.com/4eb7898d29.js" crossorigin="anonymous"></script>
             <script src="{{ asset('Js/appSeeMore.js')}}"></script>
             <script src="{{ asset('Js/appModal.js')}}"></script>
+            <script src="{{ asset('Js/popUpArticlePanier.js')}}"></script>
         {% endblock %}
     </body>
 </html>
