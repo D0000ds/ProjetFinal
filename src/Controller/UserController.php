@@ -25,6 +25,8 @@ class UserController extends AbstractController
         $clients = $entityManager->getRepository(User::class)->findAll();
         $commande = $entityManager->getRepository(Commande::class)->findBy(['client' => $this->getUser()->getId()]);
         $moyenneSatisfaction = $entityManager->getRepository(User::class)->moyenneAvis($this->getUser()->getId());
+        $adressePrincipale = $entityManager->getRepository(Adresse::class)->findBy(['client' => $this->getUser()->getId()], ["id" => "ASC"], '1');
+        $adresseSecondaire = $entityManager->getRepository(Adresse::class)->findBy(['client' => $this->getUser()->getId()], ["id" => "ASC"], null, 1);
 
         $totalDepenser = 0;
 
@@ -38,14 +40,15 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', [
             'clients' => $clients,
-            'commande' => $commande,
             'totalDepenser' => $totalDepenser,
             'moyenneSatisfaction' => $moyenneSatisfaction,
+            'adressePrincipales' => $adressePrincipale,
+            'adresseSecondaires' => $adresseSecondaire,
         ]);
     }
 
     #[Route('/edit-password', name: 'edit_password_user')]
-    public function edit(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher):Response
+    public function editPassword(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher):Response
     {
         $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
 
@@ -62,6 +65,8 @@ class UserController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
 
+                $this->addFlash('sucess', 'Le mot de passe a été changer.');
+                return $this->redirectToRoute('app_user');
             }else {
                 $this->addFlash('warning', 'Mot de passe incorrect');
             }
@@ -70,5 +75,29 @@ class UserController extends AbstractController
         return $this->render('user/editPassword.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/profile/edit', name: 'edit_user')]
+    public function edit(){
+
+    }
+
+    #[Route('/profile/delete', name: 'delete_user')]
+    public function delete(EntityManagerInterface $entityManager){
+        $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
+
+        $user->setEmail("Delete");
+        $user->setPassword("Delete");
+        $user->setNewsLetter(false);
+        $user->setIsVerified(false);
+        $user->setTelephone("Delete");
+        $user->setNom("Delete");
+        $user->setPrenom("Delete");
+        $this->container->get('security.token_storage')->setToken(null);
+
+        $this->addFlash('sup', 'Votre compte a bien été supprimée');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home');
     }
 }

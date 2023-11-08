@@ -3,6 +3,11 @@
 {% block title %}Hello UserController!{% endblock %}
 
 {% block body %}
+{% for message in app.flashes('sucess') %}
+<div class="sucess">
+    <span>{{ message }}</span>
+</div>
+{% endfor %}
 {% for client in clients %}
     {% if client.id == app.user.id %}
         <div class="profileContainer">
@@ -75,28 +80,59 @@
                     <div class="profileTextArea">
                         <div class="sousProfileTextArea">
                             <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ client.email }}</textarea>
-                            {% if client.commandes is not empty %}
-                                {% for commande in client.commandes %}
-                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea"> {{ commande.nom }} </textarea>
-                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ commande.prenom }}</textarea>
-                                {% endfor %}
-                            {% else %}
+                            {% if client.nom == null %}
                                 <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Nom</textarea>
                                 <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Prenom</textarea>
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Téléphone</textarea>
+                            {% else %} 
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea"> {{ client.nom }} </textarea>
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ client.prenom }}</textarea> 
+                                <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ client.telephone }}</textarea>
                             {% endif %}
-                            <div class="sousProfileTextAreaAdresse">
-                                <div class="sousProfileTextAreaAdresseTitre">
-                                    <h4>Adresse principale</h4>
-                                </div>
-                                <div class="textAreaAdresse">        
-                                    <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Adresse</textarea>
-                                    <div class="duoTextArea">
-                                        <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Code postale</textarea>
-                                        <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Ville</textarea>
+                            {% if client.adresses is not empty %}
+                                {% for adressePrincipale in adressePrincipales %}
+                                    <div class="sousProfileTextAreaAdresse">
+                                        <div class="sousProfileTextAreaAdresseTitre">
+                                            <h4>Adresse principale</h4>
+                                        </div>
+                                        <div class="textAreaAdresse">
+                                            <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ adressePrincipale.adresse }}</textarea>
+                                            <div class="duoTextArea">
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">{{ adressePrincipale.codePostal }}</textarea>
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">{{ adressePrincipale.ville }}</textarea>
+                                            </div> 
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <button class="boutonAdresse">Voir la liste des adresses</button>
+                                {% endfor %}
+                                {% for adresseSecondaire in adresseSecondaires %}
+                                    <div class="sousProfileTextAreaAdresseNone none">
+                                        <div class="sousProfileTextAreaAdresseTitre">
+                                            <h4>Adresse</h4>
+                                        </div>
+                                        <div class="textAreaAdresse">
+                                            <textarea disabled name="" id="" cols="30" rows="1" class="textArea">{{ adresseSecondaire.adresse }}</textarea>
+                                            <div class="duoTextArea">
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">{{ adresseSecondaire.codePostal }}</textarea>
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">{{ adresseSecondaire.ville }}</textarea>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                    <div class="sousProfileTextAreaAdresse">
+                                        <div class="sousProfileTextAreaAdresseTitre">
+                                            <h4>Adresse principale</h4>
+                                        </div>
+                                        <div class="textAreaAdresse">  
+                                            <textarea disabled name="" id="" cols="30" rows="1" class="textArea">Adresse</textarea>
+                                            <div class="duoTextArea">
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Code postale</textarea>
+                                                <textarea disabled name="" id="" cols="15" rows="1" class="textAreaLittle">Ville</textarea>
+                                            </div> 
+                                        </div>
+                                    </div>
+                            {% endif %}
+                            <button class="boutonAdresse" id="bouton">Voir la liste des adresses</button>
                         </div>
                         <aside class="asideBtnEdit">
                             <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
@@ -104,8 +140,7 @@
                     </div>
                 </div>
                 <a href="{{path('edit_password_user')}}" class="btnMdp">Changer de mot de passe</a>
-                <a href="" class="btnAdresse">Ajouter une adresse</a>
-                <a href="" class="btnDel">Supprimer votre compte</a>
+                <a href="{{path('delete_user')}}" class="btnDel">Supprimer votre compte</a>
             </div>
         </div>
     {% endif %}

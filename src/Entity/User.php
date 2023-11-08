@@ -44,10 +44,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Adresse::class)]
+    private Collection $adresses;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $telephone = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $prenom = null;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->adresses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,6 +213,72 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresse>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adresse $adress): static
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses->add($adress);
+            $adress->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adresse $adress): static
+    {
+        if ($this->adresses->removeElement($adress)) {
+            // set the owning side to null (unless already changed)
+            if ($adress->getClient() === $this) {
+                $adress->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): static
+    {
+        $this->prenom = $prenom;
 
         return $this;
     }

@@ -1239,6 +1239,28 @@ main{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
+.sucess {
+    background-color: #B5CB99;
+    border: #556B2F solid 2px;
+    border-radius: 5px;
+    position: absolute;
+}
+
+
+.sousProfileTextAreaAdresseNone {
+    width: 100%;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    margin-top: 1%;
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.none {
+    display: none;
+}
+
 .boutonAdresse:hover{
     box-shadow: inset 700px 0 0 0 white;
     color: #65451F;
