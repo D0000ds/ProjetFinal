@@ -15,11 +15,55 @@
                         <h2>Information</h2>
                     </div>
                     <span>Taux de satisfaction:</span>
-                    <span></span>
+                    {% if moyenneSatisfaction.moyenneSatisfaction is null %}
+                        <span>Vous avez mis aucune note</span>
+                    {% else %}
+                        {% if moyenneSatisfaction.moyenneSatisfaction == 5 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenneSatisfaction.moyenneSatisfaction >= 4 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenneSatisfaction.moyenneSatisfaction >= 3 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% elseif moyenneSatisfaction.moyenneSatisfaction >= 2 %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% else %}
+                            <div>
+                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                     <span>Nombre de commande:</span>
                     <span>{{ client.commandes | length }}</span>
                     <span>Argent dépensé:</span>
-                    <span>€</span>
+                    <span>{{totalDepenser}} €</span>
                 </div>
             </aside>
             <div class="profileMain">
@@ -59,7 +103,7 @@
                         </aside>
                     </div>
                 </div>
-                <a href="" class="btnMdp">Changer de mot de passe</a>
+                <a href="{{path('edit_password_user')}}" class="btnMdp">Changer de mot de passe</a>
                 <a href="" class="btnAdresse">Ajouter une adresse</a>
                 <a href="" class="btnDel">Supprimer votre compte</a>
             </div>

@@ -5,11 +5,17 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Adresse;
 use App\Entity\Commande;
+use App\Entity\CommandeArticle;
+use App\Form\EditPasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+
 
 class UserController extends AbstractController
 {
@@ -18,10 +24,51 @@ class UserController extends AbstractController
     {
         $clients = $entityManager->getRepository(User::class)->findAll();
         $commande = $entityManager->getRepository(Commande::class)->findBy(['client' => $this->getUser()->getId()]);
+        $moyenneSatisfaction = $entityManager->getRepository(User::class)->moyenneAvis($this->getUser()->getId());
+
+        $totalDepenser = 0;
+
+        foreach($commande as $c) {
+            $commandeArticles = $entityManager->getRepository(CommandeArticle::class)->findBy(['commande' => $c->getId()]);
+
+            foreach($commandeArticles as $ca){
+                $totalDepenser += $ca->getQuantite() * $ca->getArticle()->getPrix();
+            }
+        }
 
         return $this->render('user/index.html.twig', [
             'clients' => $clients,
             'commande' => $commande,
+            'totalDepenser' => $totalDepenser,
+            'moyenneSatisfaction' => $moyenneSatisfaction,
+        ]);
+    }
+
+    #[Route('/edit-password', name: 'edit_password_user')]
+    public function edit(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher):Response
+    {
+        $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
+
+        $form = $this->createForm(EditPasswordFormType::class, $user);
+
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            if($userPasswordHasher->isPasswordValid($user, $form->get('plainPassword')->getData())){
+                $newPassword = $form->get('newPassword')->getData();
+                $hashedNewPassword = $userPasswordHasher->hashPassword($user, $newPassword);
+                $user->setPassword($hashedNewPassword);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+            }else {
+                $this->addFlash('warning', 'Mot de passe incorrect');
+            }
+        }
+
+        return $this->render('user/editPassword.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

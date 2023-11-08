@@ -39,28 +39,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function moyenneAvis($id){
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $queryBuilder
+        ->select('AVG(a.note) AS moyenneSatisfaction')
+        ->from('App\Entity\Avis', 'a')
+        ->where('a.client = :id')
+        ->setParameter('id', $id)
+        ->getQuery();
+
+        $result = $query->getOneOrNullResult();
+
+        return $result;
+    }
 }
