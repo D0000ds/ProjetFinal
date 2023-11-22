@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+{% if app.user %}
+    {% if app.session.get('panier') %}
+        <div class="containerLivraison">
+            <div class="sousContainerLivraison">
+                {% for user in users %}
+                    {% if user.id == app.user.id %}
+                        {% for adresse in adresses %}
+                            {% if adresse.client.id == app.user.id %}
+                                <div class="adresseContainer">
+                                    <div class="vAdresse">
+                                        <h2>Votre adresse</h2>
+                                    </div>
+                                    <div class="adresseBigPart">
+                                        <div class="adresseSousContainer">
+                                            <h3>Adresse : {{ adresse.adresse }}</h3>
+                                            <h3>Ville : {{ adresse.ville }}</h3>
+                                            <h3>Code Postal : {{ adresse.codePostal }}</h3>
+                                        </div>
+    
+                                        <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
+
+                                    </div>
+                                </div>
+                            {% else %}
+                                <h2>Vous n'avez pas d'adresse pas enregister.</h2>
+                                <a href="">Ajouter une Adresse</a>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="infoLivretteContainer">
+                            <h2>Information personnelle de livraison</h1>
+                            {% if user.nom or user.prenom is not null %}
+                                <div class="infoLivretteTextAreaContainer">
+                                    <div class="doubleTextAreaLivrette">
+                                        <textarea name="" id="" cols="30" rows="1" class="textAreaLittle">{{ user.nom }}</textarea>
+                                        <textarea name="" id="" cols="30" rows="1" class="textAreaLittle">{{ user.prenom }}</textarea>
+                                    </div>
+                                    <textarea name="" id="" cols="30" rows="1" class="textArea">{{ user.telephone }}</textarea>
+                                    <div>
+                                        <input type="checkbox" name="" id="">
+                                        <label for="">Retenir les informations personnelle de livraison</label>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="infoLivretteTextAreaContainer">
+                                    <div class="doubleTextAreaLivrette">
+                                        <textarea name="" id="" cols="30" rows="1" placeholder="Nom" class="textAreaLittle"></textarea>
+                                        <textarea name="" id="" cols="30" rows="1" placeholder="Prenom" class="textAreaLittle"></textarea>
+                                    </div>
+                                    <textarea name="" id="" cols="30" rows="1" placeholder="Téléphone" class="textArea"></textarea>
+                                    <div>
+                                        <input type="checkbox" name="" id="">
+                                        <label for="">Retenir les informations personnelle de livraison</label>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <div>
+                    <h2>Choisissez votre livraison</h2>
+                    <div class="livraisonChoice">
+                        <input type="radio" id="" name="" value="" />
+                        <div class="">
+                            <h3>Envoie Standard</h3>
+                            <span>Livré entre le {{date3j}} et le {{date5j}} (Livraison qu'en France)</span>
+                        </div>
+                        <span>10 €</span>
+                    </div>
+                    <h2>Click and Collect</h2>
+                    <div>
+                        <input type="radio" id="" name="" value="" />
+                        <h3>Click and Collect</h3>
+                        <span>Dès ouverture de magasin et jusq'à fermeture du magasin</span>
+                        <span>Gratuit</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sousContainerRecap">
+                <h1>Récapitulatif</h1>
+                <span>Article</span>
+                {% for data in data %}
+                    <span>{{data.article.libelle}}</span>
+                    <span>{{data.article.prix}}</span>
+                {% endfor %}
+                <span>Livraison</span>
+                <span>{{ prixLivraison }} €</span>
+                <h4>Total Commande</h4>
+                <span>{{total + prixLivraison }} €</span>
+                <input type="submit" value="Commander">
+            </div>
+        </div>
+    {% else %}
+        <h2>Votre panier est vide.</h2>
+    {% endif %}
+{% else %}
+    <h2>Connectez-vous s'il vous plait.</h2>
+{% endif %}
+{% endblock %}

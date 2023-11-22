@@ -1282,3 +1282,79 @@ main{
 .btnMdp:active{
     transform: scale(0.96);
 }
+
+/* *********************************************Livraison page**************************************************** */
+.containerLivraison {
+    display: flex;
+    width: 95%;
+    flex-direction: row;
+}
+
+.sousContainerLivraison{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+.adresseContainer{
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 75%;
+}
+
+.adresseSousContainer{
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+}
+
+.vAdresse{
+    display: flex;
+    align-items: center;
+    border-right: #65451F solid 2px;
+    padding-right: 25px;
+    padding-left: 20px;
+    
+}
+
+.adresseBigPart{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.infoLivretteContainer{
+    margin-top: 50px;
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.infoLivretteTextAreaContainer{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.doubleTextAreaLivrette {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.doubleTextAreaLivrette textarea{
+    width: 48%;
+}
+
+.livraisonChoice {
+    display: flex;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    justify-content: space-between;
+}

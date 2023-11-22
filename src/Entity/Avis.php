@@ -28,7 +28,7 @@ class Avis
     #[ORM\ManyToOne(inversedBy: 'avis')]
     private ?User $client = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $datePost = null;
 
     public function __construct()

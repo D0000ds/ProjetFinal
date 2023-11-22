@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Adresse;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -121,4 +123,42 @@ class CartController extends AbstractController
 
         return $this->redirect($route);
     }
+
+    #[Route('/livraison', name: 'livraison_cart')]
+    public function livraison(SessionInterface $session, EntityManagerInterface $entityManager): Response
+    {
+        $users = $entityManager->getRepository(User::class)->findAll();
+        $adresses = $entityManager->getRepository(Adresse::class)->findAll();
+
+        $date3j =  date('d/m/Y', strtotime('+3 days'));
+        $date5j =  date('d/m/Y', strtotime('+5 days'));
+
+        $panier = $session->get('panier', []);
+
+        $data = [];
+        $total = 0;
+
+        $prixLivraison = 10.00;
+
+        foreach($panier as $id => $quantite){
+           $article = $entityManager->getRepository(Article::class)->find($id);
+           $data[] = [
+            'article' => $article,
+            'quantite' => $quantite
+           ];
+           $total += $article->getPrix() * $quantite;
+        }
+        
+
+        return $this->render('cart/livraison.html.twig', [
+            "users" => $users,
+            "adresses" => $adresses,
+            "date3j" => $date3j,
+            "date5j" => $date5j,
+            "data" => $data,
+            "total" => $total,
+            "prixLivraison" => $prixLivraison,
+        ]);
+    }
 }
+
