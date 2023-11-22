@@ -13,6 +13,7 @@
                             {% if adresse.client.id == app.user.id %}
                                 <div class="adresseContainer">
                                     <div class="vAdresse">
+                                        <input type="radio" id="" name="adresse" value="adresse{{ adresse.id }}" />
                                         <h2>Votre adresse</h2>
                                     </div>
                                     <div class="adresseBigPart">
@@ -21,25 +22,30 @@
                                             <h3>Ville : {{ adresse.ville }}</h3>
                                             <h3>Code Postal : {{ adresse.codePostal }}</h3>
                                         </div>
-    
-                                        <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
-
+                                        <div class="adresseEdit">
+                                            <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
+                                        </div>
                                     </div>
                                 </div>
-                            {% else %}
-                                <h2>Vous n'avez pas d'adresse pas enregister.</h2>
-                                <a href="">Ajouter une Adresse</a>
                             {% endif %}
                         {% endfor %}
+                        {% if user.adresses is empty %}
+                            <div class="addAdresse">
+                                <h2>Vous n'avez pas d'adresse pas enregister.</h2>
+                            </div>
+                        {% endif %}
+                        <div class="addAdresse">
+                            <a class="btnAddLivAdresse" href="">Ajouter une Adresse</a>
+                        </div>
                         <div class="infoLivretteContainer">
                             <h2>Information personnelle de livraison</h1>
                             {% if user.nom or user.prenom is not null %}
                                 <div class="infoLivretteTextAreaContainer">
                                     <div class="doubleTextAreaLivrette">
-                                        <textarea name="" id="" cols="30" rows="1" class="textAreaLittle">{{ user.nom }}</textarea>
-                                        <textarea name="" id="" cols="30" rows="1" class="textAreaLittle">{{ user.prenom }}</textarea>
+                                        <textarea  cols="30" rows="1" class="textAreaLittle">{{ user.nom }}</textarea>
+                                        <textarea cols="30" rows="1" class="textAreaLittle">{{ user.prenom }}</textarea>
                                     </div>
-                                    <textarea name="" id="" cols="30" rows="1" class="textArea">{{ user.telephone }}</textarea>
+                                    <textarea cols="30" rows="1" class="textArea">{{ user.telephone }}</textarea>
                                     <div>
                                         <input type="checkbox" name="" id="">
                                         <label for="">Retenir les informations personnelle de livraison</label>
@@ -48,10 +54,10 @@
                             {% else %}
                                 <div class="infoLivretteTextAreaContainer">
                                     <div class="doubleTextAreaLivrette">
-                                        <textarea name="" id="" cols="30" rows="1" placeholder="Nom" class="textAreaLittle"></textarea>
-                                        <textarea name="" id="" cols="30" rows="1" placeholder="Prenom" class="textAreaLittle"></textarea>
+                                        <textarea cols="30" rows="1" placeholder="Nom" class="textAreaLittle"></textarea>
+                                        <textarea cols="30" rows="1" placeholder="Prenom" class="textAreaLittle"></textarea>
                                     </div>
-                                    <textarea name="" id="" cols="30" rows="1" placeholder="Téléphone" class="textArea"></textarea>
+                                    <textarea cols="30" rows="1" placeholder="Téléphone" class="textArea"></textarea>
                                     <div>
                                         <input type="checkbox" name="" id="">
                                         <label for="">Retenir les informations personnelle de livraison</label>
@@ -61,37 +67,50 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-                <div>
+                <form class="livraisonContainer" method="post">
                     <h2>Choisissez votre livraison</h2>
                     <div class="livraisonChoice">
-                        <input type="radio" id="" name="" value="" />
-                        <div class="">
+                        <input class="radioLiv" type="radio" name="livraison" value="standard" checked/>
+                        <div class="livraisonStandard">
                             <h3>Envoie Standard</h3>
                             <span>Livré entre le {{date3j}} et le {{date5j}} (Livraison qu'en France)</span>
                         </div>
                         <span>10 €</span>
                     </div>
                     <h2>Click and Collect</h2>
-                    <div>
-                        <input type="radio" id="" name="" value="" />
-                        <h3>Click and Collect</h3>
-                        <span>Dès ouverture de magasin et jusq'à fermeture du magasin</span>
+                    <div class="livraisonChoice">
+                        <input class="radioLiv"  type="radio" name="livraison" value="clickAndCollect" />
+                        <div class="livraisonStandard">
+                            <h3>Click and Collect</h3>
+                            <span>Dès ouverture de magasin et jusq'à fermeture du magasin</span>
+                        </div>
                         <span>Gratuit</span>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="sousContainerRecap">
-                <h1>Récapitulatif</h1>
-                <span>Article</span>
+                <div class="titreContainerRecap">
+                    <h1>Récapitulatif</h1>
+                </div>
+                <span>Article :</span>
                 {% for data in data %}
-                    <span>{{data.article.libelle}}</span>
-                    <span>{{data.article.prix}}</span>
+                    <div class="rowPrixArticle">
+                        <span>{{data.article.libelle}}</span>
+                        <span>{{data.quantite}} x {{data.article.prix}} €</span>
+                    </div>
                 {% endfor %}
-                <span>Livraison</span>
-                <span>{{ prixLivraison }} €</span>
-                <h4>Total Commande</h4>
-                <span>{{total + prixLivraison }} €</span>
-                <input type="submit" value="Commander">
+                <div class="rowPrixArticle">
+                    <span>Livraison</span>
+                    <span id="prixLiv">{{ prixLivraison }} €</span>
+                </div>
+                <div class="rowPrixArticle">
+                    <h4>Total Commande</h4>
+                    <div class="price">
+                        <h4 id="prixTotal">{{total + prixLivraison }}</h4>
+                        <h4>€</h4>
+                    </div>
+                </div>
+                <input class="btnCommander" type="submit" value="Commander">
             </div>
         </div>
     {% else %}

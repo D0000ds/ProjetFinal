@@ -1302,6 +1302,7 @@ main{
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     width: 75%;
+    margin-bottom: 30px;
 }
 
 .adresseSousContainer{
@@ -1313,10 +1314,15 @@ main{
 .vAdresse{
     display: flex;
     align-items: center;
+    justify-content: center;
     border-right: #65451F solid 2px;
     padding-right: 25px;
     padding-left: 20px;
-    
+    width: 20%;
+}
+
+.vAdresse input {
+    margin-right: 10px;
 }
 
 .adresseBigPart{
@@ -1324,7 +1330,7 @@ main{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
+    width: 82%;
 }
 
 .infoLivretteContainer{
@@ -1352,9 +1358,106 @@ main{
 }
 
 .livraisonChoice {
+    margin-top: 20px;
     display: flex;
     background-color: #f1f1f1;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.livraisonStandard{
+    width: 95%;
+}
+
+.radioLiv{
+    margin-right: 10px;
+}
+
+.adresseEdit{
+    margin-right: 20px;
+}
+
+.livraisonContainer{
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+}
+
+.sousContainerRecap {
+    display: flex;
+    flex-direction: column;
+    border: #65451F solid 2px;
+    width: 20%;
+    padding: 10px;
+    height: 250px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.titreContainerRecap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rowPrixArticle{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1px;
+    margin-bottom: 5px;
+}
+
+.price{
+    display: flex;
+}
+
+.btnCommander{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #765827;
+    border: #765827 solid 2px;
+    color: white;
+    height: 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+    margin-bottom: 1%;
+    outline: none;
+}
+
+.btnCommander:hover{
+    box-shadow: inset 300px 0 0 0 white;
+    color: #765827;
+}
+
+.addAdresse{
+    text-align: center;
+    width: 75%;
+}
+
+.btnAddLivAdresse{
+    background-color: #765827;
+    text-decoration: none;
+    color: white;
+    border-radius: 50px;
+    border:#765827 solid 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+}
+
+.btnAddLivAdresse:hover{
+    box-shadow: inset 300px 0 0 0 white;
+    color: #765827;
 }
