@@ -148,7 +148,6 @@ class CartController extends AbstractController
            ];
            $total += $article->getPrix() * $quantite;
         }
-        
 
         return $this->render('cart/livraison.html.twig', [
             "users" => $users,

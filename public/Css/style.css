@@ -1383,8 +1383,8 @@ main{
 
 .livraisonContainer{
     display: flex;
-    width: 75%;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
 }
 
 .sousContainerRecap {
@@ -1432,6 +1432,7 @@ main{
     box-shadow: inset 0 0 0 0 white;
     margin-bottom: 1%;
     outline: none;
+    text-decoration: none;
 }
 
 .btnCommander:hover{
