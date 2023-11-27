@@ -1462,3 +1462,15 @@ main{
     box-shadow: inset 300px 0 0 0 white;
     color: #765827;
 }
+
+.btnDelAdresse{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF8080;
+    color: white;
+    text-decoration: none;
+    padding: 0px 10px;
+    border-radius: 50px;
+    margin-top: 15px;
+}

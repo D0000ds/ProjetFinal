@@ -24,7 +24,7 @@
                                             <h3>Code Postal : {{ adresse.codePostal }}</h3>
                                         </div>
                                         <div class="adresseEdit">
-                                            <a href="" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
+                                            <a href="{{path('edit_adresse', {'id': adresse.id})}}" class="btnEdit"><i class="fa-solid fa-gear"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -36,31 +36,31 @@
                             </div>
                         {% endif %}
                         <div class="addAdresse">
-                            <a class="btnAddLivAdresse" href="">Ajouter une Adresse</a>
+                            <a class="btnAddLivAdresse" href="{{path('add_adresse', {'id': user.id})}}">Ajouter une Adresse</a>
                         </div>
                         <div class="infoLivretteContainer">
                             <h2>Information personnelle de livraison</h1>
                             {% if user.nom or user.prenom is not null %}
                                 <div class="infoLivretteTextAreaContainer">
                                     <div class="doubleTextAreaLivrette">
-                                        <textarea  cols="30" rows="1" class="textAreaLittle">{{ user.nom }}</textarea>
-                                        <textarea cols="30" rows="1" class="textAreaLittle">{{ user.prenom }}</textarea>
+                                        <textarea  cols="30" name="nom" rows="1" class="textAreaLittle">{{ user.nom }}</textarea>
+                                        <textarea cols="30" name="prenom" rows="1" class="textAreaLittle">{{ user.prenom }}</textarea>
                                     </div>
-                                    <textarea cols="30" rows="1" class="textArea">{{ user.telephone }}</textarea>
+                                    <textarea cols="30" name="tel" rows="1" class="textArea">{{ user.telephone }}</textarea>
                                     <div>
-                                        <input type="checkbox" name="" id="">
+                                        <input type="checkbox" name="retenir" id="" value="true">
                                         <label for="">Retenir les informations personnelle de livraison</label>
                                     </div>
                                 </div>
                             {% else %}
                                 <div class="infoLivretteTextAreaContainer">
                                     <div class="doubleTextAreaLivrette">
-                                        <textarea cols="30" rows="1" placeholder="Nom" class="textAreaLittle"></textarea>
-                                        <textarea cols="30" rows="1" placeholder="Prenom" class="textAreaLittle"></textarea>
+                                        <textarea cols="30" rows="1" name="nom" placeholder="Nom" class="textAreaLittle"></textarea>
+                                        <textarea cols="30" rows="1" name="prenom" placeholder="Prenom" class="textAreaLittle"></textarea>
                                     </div>
-                                    <textarea cols="30" rows="1" placeholder="Téléphone" class="textArea"></textarea>
+                                    <textarea cols="30" rows="1" name="tel" placeholder="Téléphone" class="textArea"></textarea>
                                     <div>
-                                        <input type="checkbox" name="" id="">
+                                        <input type="checkbox" name="retenir" id="" value="true">
                                         <label for="">Retenir les informations personnelle de livraison</label>
                                     </div>
                                 </div>
