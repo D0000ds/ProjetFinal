@@ -18,21 +18,46 @@ use Symfony\Component\Mime\Part\DataPart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class PayementController extends AbstractController
 {
 
-    #[Route('/sendMail', name: 'app_mail')]
-    public function sendMail(MailerInterface $mailer): Response
+    #[Route('/sendMail/{id}', name: 'app_mail')]
+    public function sendMail($id, MailerInterface $mailer, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml('hello world');
+        $panier = $session->get('panier', []);
+        $facture = $entityManager->getRepository(Facture::class)->find($id);
 
+        foreach($panier as $id => $quantite){
+            $article = $entityManager->getRepository(Article::class)->find($id);
+            $data[] = [
+                'article' => $article,
+                'quantite' => $quantite
+            ];
+
+            $quantite += $quantite;
+
+            if($quantite * $article->getPrix() == $facture->getPrix()){
+                $prix = "10 €";
+            }else {
+                $prix = "Gratuit";
+            }
+        }
+
+        $dompdf = new Dompdf();
+        $html = $this->render('facture/facture.html.twig', [
+            'facture' => $facture,
+            'data' => $data,
+            'prix' => $prix,
+        ]);
+        $dompdf->loadHtml($html);
         $dompdf->render();
+
+        $pdf = $dompdf->output();
         
 
         $email = (new Email())
@@ -40,11 +65,12 @@ class PayementController extends AbstractController
             ->to($this->getUser()->getEmail())
             ->subject('Achat sur CoffMulhouse')
             ->text('Merci pour votre Achat voila votre facture')
-            ->attachFromPath(new DataPart(new File('../public/Img/Commandes_Symfony.pdf')));
+            ->attach($pdf, 'Facture n°'. $facture->getId().".pdf" , 'application/pdf');
 
         $mailer->send($email);
 
-
+        $session->remove('panier');
+        
         return $this->render('payement/sucess.html.twig');
     }
 
@@ -72,13 +98,7 @@ class PayementController extends AbstractController
             $quantiteTotal += $quantite;
         }
 
-        if($livraison == "clickAndCollect"){
-            $total = 0;
-        } else {
-            $total = 10;
-        }
-
-
+        
         foreach($data as $produit){
             $lineItems[] = [
                 'quantity' => $produit['quantite'],
@@ -92,41 +112,66 @@ class PayementController extends AbstractController
             ];
         }
         
+        
         Stripe::setApiKey($_ENV["STRIPE_SECRET"]);
         Stripe::setApiVersion('2023-10-16');
         
-        $session = Session::create([
-            'line_items' => $lineItems,
-            'mode' => 'payment',
-            'customer_email' => $adresse->getClient()->getEmail(),
-            'success_url' => 'http://127.0.0.1:8000/payement/sucess/'.$adresseId,
-            'cancel_url' => 'http://127.0.0.1:8000/home',
-            'payment_intent_data' => [
-                'shipping' => [
-                  'name' => $adresse->getClient()->getNom() .' '. $adresse->getClient()->getNom(),
-                  'phone' => $adresse->getClient()->getTelephone(),
-                  'address' => [
-                    'country' => 'France',
-                    'city' => $adresse->getVille(),
-                    'line1' => $adresse->getAdresse(),
-                    'postal_code' => $adresse->getCodePostal()
-                  ],
-                ],
-            ],
-            'shipping_options' => [
-                [
-                  'shipping_rate_data' => [
-                    'type' => 'fixed_amount',
-                    'fixed_amount' => [
-                      'amount' => 10 * 100,
-                      'currency' => 'eur',
-                        ],
-                    'display_name' => 'Livraison standard',
+        if($livraison == "clickAndCollect"){
+            $total = 0;
+            $session = Session::create([
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'customer_email' => $adresse->getClient()->getEmail(),
+                'success_url' => 'http://127.0.0.1:8000/payement/sucess/'.$adresseId,
+                'cancel_url' => 'http://127.0.0.1:8000/home',
+                'payment_intent_data' => [
+                    'shipping' => [
+                      'name' => $adresse->getClient()->getNom() .' '. $adresse->getClient()->getNom(),
+                      'phone' => $adresse->getClient()->getTelephone(),
+                      'address' => [
+                        'country' => 'France',
+                        'city' => $adresse->getVille(),
+                        'line1' => $adresse->getAdresse(),
+                        'postal_code' => $adresse->getCodePostal()
+                      ],
                     ],
                 ],
-            ],
-        ]);
-
+            ]);
+        } else {
+            $total = 10;
+            $session = Session::create([
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'customer_email' => $adresse->getClient()->getEmail(),
+                'success_url' => 'http://127.0.0.1:8000/payement/sucess/'.$adresseId,
+                'cancel_url' => 'http://127.0.0.1:8000/home',
+                'payment_intent_data' => [
+                    'shipping' => [
+                      'name' => $adresse->getClient()->getNom() .' '. $adresse->getClient()->getNom(),
+                      'phone' => $adresse->getClient()->getTelephone(),
+                      'address' => [
+                        'country' => 'France',
+                        'city' => $adresse->getVille(),
+                        'line1' => $adresse->getAdresse(),
+                        'postal_code' => $adresse->getCodePostal()
+                      ],
+                    ],
+                ],
+                'shipping_options' => [
+                    [
+                      'shipping_rate_data' => [
+                        'type' => 'fixed_amount',
+                        'fixed_amount' => [
+                          'amount' => 10 * 100,
+                          'currency' => 'eur',
+                            ],
+                        'display_name' => 'Livraison standard',
+                        ],
+                    ],
+                ],
+            ]);
+        }
+        
         if($retenir == "true"){
             $user = $this->getUser();
             $nom = $request->request->get('nom');
@@ -216,10 +261,7 @@ class PayementController extends AbstractController
         
         $entityManager->flush();
 
-
-        $session->remove('panier');
-
-        return $this->redirectToRoute('app_mail');
+        return $this->redirectToRoute('app_mail', ['id' => $facture->getId()]);
     }
 
 }

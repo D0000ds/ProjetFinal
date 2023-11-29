@@ -1,0 +1,41 @@
+<div>
+    <div style="background-color: #65451F; width: 100%; padding: 5px;">
+        <h1 style="color: white;">CoffMulhouse</h1>
+    </div>
+    <div>
+        <div>
+            <span>CoffMulhouse</span><br>
+            <span>13 avenue boulevard</span><br>
+            <span>68100 MULHOUSE</span><br>
+            <span>N° SIRET: 141589746327154</span><br>
+            <span>09 89 89 89 89</span><br>
+        </div>
+        <div style="text-align: right;">
+            <span>{{facture.nomClient}} {{facture.prenomClient}}</span><br>
+            <span>{{facture.adresseFacturation}}</span><br>
+            <span>n° de facture: {{facture.numeroDeFacturation}}</span><br>
+        </div>
+        <div>
+            <span>Date de facture: {{facture.dateCommande | date('d/m/Y')}}</span>
+        </div>
+        <table style="width: 100%;">
+            <tr>
+              <th style="border: 1px solid black;">Quantité</th>
+              <th style="border: 1px solid black;">Désignation</th>
+              <th style="border: 1px solid black;">Prix unitaire</th>
+            </tr>
+            {% for d in data %}
+                <tr style="text-align: right;">
+                    <td style="border: 1px solid black;">{{d.quantite}}</td>
+                    <td style="border: 1px solid black;">{{d.article.libelle}}</td>
+                    <td style="border: 1px solid black;">{{d.article.prix}}</td>
+                </tr>
+            {% endfor %}
+          </table>
+          <div style="text-align: right;">
+                <span style="border: 1px solid black;">Livraison: {{prix}}</span><br>
+                <span style="border: 1px solid black;">Total: {{facture.prix}}€</span>
+          </div>
+    </div>
+    
+</div>
