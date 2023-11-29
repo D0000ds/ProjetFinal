@@ -3,13 +3,11 @@
 {% block title %}Hello PayementController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Sucess! ✅</h1>
-
+<div class="containerSuccess">
+    <h1>Votre commande a été passer avec succès</h1>
+    <figure>
+        <img src="{{asset('Img/enseigne.png')}}" alt="">
+    </figure>
+    <a href="{{path('app_home')}}" class="btnAddPanier">Retour a la Home page</a>
 </div>
 {% endblock %}

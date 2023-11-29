@@ -677,7 +677,7 @@ main{
 }
 
 .btnAddPanier:hover{
-    box-shadow: inset 200px 0 0 0 white;
+    box-shadow: inset 550px 0 0 0 white;
     color: #765827;
 }
 
@@ -1473,4 +1473,61 @@ main{
     padding: 0px 10px;
     border-radius: 50px;
     margin-top: 15px;
+}
+/* *******************************************SUCESS PAGE******************************************************** */
+.containerSuccess{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 390px;
+}
+/* ***********************************************Commande Page******************************************************************* */
+.suivieCommandeFig img{
+    width: 150px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.commandeCard{
+    display: flex;
+    width: 90%;
+    background-color: #F4F4F4;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.commandeSousCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.commandeAvis{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.btnAvis{
+    text-decoration: none;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+    outline: none;
+    background-color: #65451F;
+    border: #65451F solid 2px;
+    border-radius: 20px;
+    color: white;
+    padding: 0px 5px;
+}
+
+.btnAvis:hover{
+    box-shadow: inset 150px 0 0 0 white;
+    color: #65451F;
+    
 }

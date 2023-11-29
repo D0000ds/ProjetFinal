@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+<div class="profileContainer">
+    <div class="profileAside">
+       <div class="profileInfos">
+        <div class="profileInfosTitre">
+            <h2>Commandes</h2>
+        </div>
+        <a href="{{path('app_commande_semaine')}}">Commandes de la semaine</a>
+        <a href="">Commandes du mois</a>
+        <a href="">Commandes de l'année</a>
+        <a href="{{path('app_commande')}}">Toute les commandes</a>
+       </div>
+    </div>
+    <div class="profileMain">
+        {% for commande in commandes %}
+            {% for CommandeArticle in commande.CommandeArticles %}
+                <div class="commandeCard">
+                    <figure class="suivieCommandeFig">
+                        <img src="{{asset(CommandeArticle.article.image)}}" alt="{{ CommandeArticle.article.libelle }}">
+                    </figure>
+                    <div class="commandeSousCard">
+                        <div class="commandeAvis">
+                            <span>{{ CommandeArticle.article.libelle }}</span>
+                            <a href="" class="btnAvis">Donner un avis</a>
+                        </div>
+                        <span>quantité: {{CommandeArticle.quantite}}</span>
+                        <span>prix: {{CommandeArticle.article.prix * CommandeArticle.quantite}} €</span>
+                        <span>Commander le {{ commande.dateCommande | date("d/m/Y") }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

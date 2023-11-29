@@ -29,7 +29,7 @@
                             <span>{{ app.user.email }}</span>
                             <div class="dropdown-content">
                                 <a href="{{ path('app_user')}}">Profile</a>
-                                <a href="">Commande</a>
+                                <a href="{{ path('app_commande')}}">Commande</a>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <a href="">Panneau d'admin</a>
                                 {% endif %}
