@@ -9,10 +9,12 @@
         <div class="profileInfosTitre">
             <h2>Commandes</h2>
         </div>
-        <a href="{{path('app_commande_semaine')}}">Commandes de la semaine</a>
-        <a href="">Commandes du mois</a>
-        <a href="">Commandes de l'année</a>
-        <a href="{{path('app_commande')}}">Toute les commandes</a>
+        <div class="commandeLinkContainer">
+            <a id="semaine" class="commandLink" href="{{path('app_commande_semaine')}}">Commandes de la semaine</a>
+            <a id="mois" class="commandLink" href="{{path('app_commande_mois')}}">Commandes du mois</a>
+            <a id="annee" class="commandLink" href="{{path('app_commande_annee')}}">Commandes de l'année</a>
+            <a id="tout" class="commandLink" href="{{path('app_commande')}}">Toute les commandes</a>
+        </div>
        </div>
     </div>
     <div class="profileMain">
@@ -25,7 +27,7 @@
                     <div class="commandeSousCard">
                         <div class="commandeAvis">
                             <span>{{ CommandeArticle.article.libelle }}</span>
-                            <a href="" class="btnAvis">Donner un avis</a>
+                            <a href="{{path('post_avis', {'id': CommandeArticle.article.id})}}" class="btnAvis">Donner un avis</a>
                         </div>
                         <span>quantité: {{CommandeArticle.quantite}}</span>
                         <span>prix: {{CommandeArticle.article.prix * CommandeArticle.quantite}} €</span>

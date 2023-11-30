@@ -21,28 +21,76 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
-//    /**
-//     * @return Commande[] Returns an array of Commande objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Commande[] Returns an array of Commande objects
+    */
+   public function semaine($id, $dateAjd, $semaine): array
+   {
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
 
-//    public function findOneBySomeField($value): ?Commande
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $query = $queryBuilder
+            ->select('c')
+            ->from('App\Entity\Commande', 'c')
+            ->where('c.dateCommande BETWEEN :start_date AND :end_date')
+            ->andWhere('c.client = :id')
+            ->orderBy('c.dateCommande', 'DESC')
+            ->setParameter('start_date', $semaine)
+            ->setParameter('end_date', $dateAjd)
+            ->setParameter('id', $id)
+            ->getQuery();
+
+        $result = $query->getResult();
+
+        return $result;
+   }
+
+   /**
+    * @return Commande[] Returns an array of Commande objects
+    */
+    public function mois($id, $dateAjd, $mois): array
+    {
+         $entityManager = $this->getEntityManager(); // get the EntityManager
+         $queryBuilder = $entityManager->createQueryBuilder();
+ 
+         $query = $queryBuilder
+             ->select('c')
+             ->from('App\Entity\Commande', 'c')
+             ->where('c.dateCommande BETWEEN :start_date AND :end_date')
+             ->andWhere('c.client = :id')
+             ->orderBy('c.dateCommande', 'DESC')
+             ->setParameter('start_date', $mois)
+             ->setParameter('end_date', $dateAjd)
+             ->setParameter('id', $id)
+             ->getQuery();
+ 
+         $result = $query->getResult();
+ 
+         return $result;
+    }
+
+    /**
+    * @return Commande[] Returns an array of Commande objects
+    */
+    public function annee($id, $dateAjd, $annee): array
+    {
+         $entityManager = $this->getEntityManager(); // get the EntityManager
+         $queryBuilder = $entityManager->createQueryBuilder();
+ 
+         $query = $queryBuilder
+             ->select('c')
+             ->from('App\Entity\Commande', 'c')
+             ->where('c.dateCommande BETWEEN :start_date AND :end_date')
+             ->andWhere('c.client = :id')
+             ->orderBy('c.dateCommande', 'DESC')
+             ->setParameter('start_date', $annee)
+             ->setParameter('end_date', $dateAjd)
+             ->setParameter('id', $id)
+             ->getQuery();
+ 
+         $result = $query->getResult();
+ 
+         return $result;
+    }
+
 }

@@ -29,8 +29,35 @@ class CommandeController extends AbstractController
         $semaine =  date('d/m/Y', strtotime('-7 days'));
         $dateObj = DateTime::createFromFormat('d/m/Y', $semaine);
 
+        $commandes = $entityManager->getRepository(Commande::class)->semaine($this->getUser()->getId(), $dateAjd, $dateObj);
 
-        $commandes = $entityManager->getRepository(Commande::class)->findBy(["client" => $this->getUser()->getId(), "dateCommande" => ['between' => $dateObj->format('Y-m-d'), $dateAjd->format('Y-m-d')]], ["dateCommande" => "DESC"]);
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $commandes,
+        ]);
+    }
+
+    #[Route('/commande/mois', name: 'app_commande_mois')]
+    public function mois(EntityManagerInterface $entityManager): Response
+    {
+        $dateAjd = new DateTime();
+        $mois =  date('d/m/Y', strtotime('-1 month'));
+        $dateObj = DateTime::createFromFormat('d/m/Y', $mois);
+
+        $commandes = $entityManager->getRepository(Commande::class)->mois($this->getUser()->getId(), $dateAjd, $dateObj);
+
+        return $this->render('commande/index.html.twig', [
+            'commandes' => $commandes,
+        ]);
+    }
+
+    #[Route('/commande/annee', name: 'app_commande_annee')]
+    public function annee(EntityManagerInterface $entityManager): Response
+    {
+        $dateAjd = new DateTime();
+        $annee =  date('d/m/Y', strtotime('-1 year'));
+        $dateObj = DateTime::createFromFormat('d/m/Y', $annee);
+
+        $commandes = $entityManager->getRepository(Commande::class)->annee($this->getUser()->getId(), $dateAjd, $dateObj);
 
         return $this->render('commande/index.html.twig', [
             'commandes' => $commandes,
