@@ -17,19 +17,46 @@ class AvisController extends AbstractController
     #[Route('/avis/{id}', name: 'app_avis')]
     public function index($id, EntityManagerInterface $entityManager): Response
     {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
         $article = $entityManager->getRepository(Article::class)->find($id);
         $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
 
         foreach($article->getAvis() as $avisCom){
             $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
         }
-
-        
 
         return $this->render('avis/index.html.twig', [
             'article' => $article,
             'moyennes' =>  $moyennesNote,
+            'count' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
         ]);
+    }
+
+    #[Route('/avis/1etoile/{id}', name: 'app_avis_etoile')]
+    public function uneEtoile($id, EntityManagerInterface $entityManager): Response
+    {
+      
     }
 
     #[Route('/avis/post/{id}', name: 'post_avis')]
