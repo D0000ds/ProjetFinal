@@ -5,8 +5,12 @@
             <img src="{{asset(article.image)}}" alt="">
         </figure>
         <div class="commentaireContainer">
-            <h1>Quelle note donneriez-vous à cette article ?</h1>
-            <h4>vous serez le {{ nb }} avis de cette article</h4>
+            {% if edit %}
+                <h1>Modifier</h1> 
+            {% else %}
+                <h1>Quelle note donneriez-vous à cette article ?</h1>
+                <h4>vous serez le {{ nb }} avis de cette article</h4>
+            {% endif %}
             {{ form_start(form) }}
                 <div class="star">
                     <i class="fa-regular fa-star" style="color: #EAC696;" data-value="1"></i>
@@ -14,12 +18,13 @@
                     <i class="fa-regular fa-star" style="color: #EAC696;" data-value="3"></i>
                     <i class="fa-regular fa-star" style="color: #EAC696;" data-value="4"></i>
                     <i class="fa-regular fa-star" style="color: #EAC696;" data-value="5"></i>
+                    <input type="hidden" name="note" id="note" value="0">
+                    <input type="hidden" id="idArticle" value="{{ article.id }}">
                 </div>
                 <div class="commentaireDiv">
                     <label>Commentaire</label>
                     {{ form_widget(form.commentaire) }}
                 </div>
-                <button type="submit" class="btnCommentaire">Publier l'avis</button>
             {{ form_end(form) }}
         </div>
     </div>
