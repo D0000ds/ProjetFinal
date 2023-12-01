@@ -1077,6 +1077,10 @@ main{
     color: #B5CB99;
 }
 
+.panierEmpty {
+    padding-bottom: 470px;
+}
+
 /* ***************************************************Profile page********************************************************** */
 .profileContainer {
     display: flex;

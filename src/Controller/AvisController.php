@@ -52,13 +52,7 @@ class AvisController extends AbstractController
             'count5' => $count5,
         ]);
     }
-
-    #[Route('/avis/1etoile/{id}', name: 'app_avis_etoile')]
-    public function uneEtoile($id, EntityManagerInterface $entityManager): Response
-    {
-      
-    }
-
+    
     #[Route('/avis/post/{id}', name: 'post_avis')]
     public function posterAvis($id, EntityManagerInterface $entityManager, Request $request): Response
     {
