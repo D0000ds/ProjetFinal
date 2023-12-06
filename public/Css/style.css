@@ -1697,3 +1697,164 @@ main{
 .btnCommentaire:active{
     transform: scale(0.96);
 }
+/* *****************************************ADMIN***************************************************** */
+.adminContainer {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
+
+.adminSousContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.addContainer{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    border-radius: 20px;
+    border: #65451F solid 3px;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.addAdmin {
+    background-color: #B5CB99;
+    text-decoration: none;
+    color: white;
+    padding: 0px 15px;
+    border-radius: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 5px 0px;
+}
+
+.delAdmin {
+    background-color: #FF8080;
+    text-decoration: none;
+    color: white;
+    padding: 0px 15px;
+    border-radius: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 5px 0px;
+}
+
+.voirClickAndCollect {
+    background-color: #95BDFF;
+    text-decoration: none;
+    color: white;
+    padding: 0px 15px;
+    border-radius: 50px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 5px 0px;
+}
+
+.infoCommandeContainer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 20px;
+    width: 70%;
+    height: 120px;
+}
+
+.sousInfoCommandeContainer{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    font-size: 18px;
+    justify-content: space-around;
+}
+
+.infoCommande {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addAdmin:active{
+    transform: scale(0.96);
+}
+
+.delAdmin:active{
+    transform: scale(0.96);
+}
+
+.voirClickAndCollect:active{
+    transform: scale(0.96);
+}
+
+/* ****************************************ADD Article Page**************************************************** */
+.formPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 500px;
+    height: 600px;
+    border: #765827 solid 2px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: translate(100px , 0px);
+}
+
+.doubleForm {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.formTextArea{
+    border: 0;
+    width: 100%;
+    background: rgba(234, 198, 150, 0.34);
+    border-radius: 20px;
+    resize: none;
+    height: 50px;
+    margin-top: 5%;
+    padding: 1%;
+    padding-left: 10px;
+    font-size: 18px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.formLittle {
+    border: 0;
+    width: 49%;
+    background: rgba(234, 198, 150, 0.34);
+    border-radius: 50px;
+    padding: 1%;
+    padding-left: 10px;
+    margin-top: 5%;
+    font-size: 18px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.btnAddArticle{
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #765827;
+    border: #765827 solid 2px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    width: 80%;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: ease-out 0.4s;
+    box-shadow: inset 0 0 0 0 white;
+    outline: none;
+}
+
+.btnAddArticle:hover{
+    box-shadow: inset 500px 0 0 0 white;
+    color: #765827;
+}

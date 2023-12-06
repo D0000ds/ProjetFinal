@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdresseController extends AbstractController
 {
     #[Route('/adresse/{id}/add', name: 'add_adresse')]
-    public function add($id, EntityManagerInterface $entityManager, Request $request,): Response
+    public function add($id, EntityManagerInterface $entityManager, Request $request): Response
     {
         $form = $this->createForm(AdresseType::class);
         $form->handleRequest($request);

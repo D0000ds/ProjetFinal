@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="adminContainer">
+    <div class="adminSousContainer">
+        <div class="addContainer">
+            <a href="{{path('add_article')}}" class="addAdmin">Ajouter un article</a>
+            <a href="" class="addAdmin">Ajouter une origine</a>
+            <a href="" class="addAdmin">Ajouter une catégorie</a>
+            <a href="" class="addAdmin">Ajouter une commande</a>
+            <a href="" class="addAdmin">Ajouter une facture</a>
+            <a href="" class="delAdmin">Supprimer une commande</a>
+            <a href="" class="delAdmin">Supprimer une facture</a>
+            <a href="" class="voirClickAndCollect">Voir les commandes click an collect</a>
+        </div>
+        <div class="infoCommandeContainer">
+            <div class="titleDescriptif">
+                <h1>Commandes</h1>
+            </div>
+            <div class="sousInfoCommandeContainer">
+                <div class="infoCommande">
+                    <span>Total</span>
+                    <span>{{countTotal}}</span>
+                </div>
+                <div class="infoCommande">
+                    <span>Dernier mois</span>
+                    <span> {{countMois}} </span>
+                </div>
+                <div class="infoCommande">
+                    <span>Dernière semaine</span>
+                    <span> {{countSemaine}} </span>
+                </div>
+                <div class="infoCommande">
+                    <span>Aujourd'hui</span>
+                    <span>{{countAjd}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+{% endblock %}

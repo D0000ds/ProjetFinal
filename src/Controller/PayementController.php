@@ -228,6 +228,7 @@ class PayementController extends AbstractController
             $facture->setLibelleArticle($produit['article']->getLibelle());
 
             $commandeArticle->setArticle($produit['article']);
+            $produit['article']->setQte($produit['article']->getQte()- $quantiteTotal);
         }
 
         

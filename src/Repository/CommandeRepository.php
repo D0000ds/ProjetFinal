@@ -93,4 +93,26 @@ class CommandeRepository extends ServiceEntityRepository
          return $result;
     }
 
+     /**
+    * @return Commande[] Returns an array of Commande objects
+    */
+    public function date($dateAjd, $annee): array
+    {
+         $entityManager = $this->getEntityManager(); // get the EntityManager
+         $queryBuilder = $entityManager->createQueryBuilder();
+ 
+         $query = $queryBuilder
+             ->select('c')
+             ->from('App\Entity\Commande', 'c')
+             ->where('c.dateCommande BETWEEN :start_date AND :end_date')
+             ->orderBy('c.dateCommande', 'DESC')
+             ->setParameter('start_date', $annee)
+             ->setParameter('end_date', $dateAjd)
+             ->getQuery();
+ 
+         $result = $query->getResult();
+ 
+         return $result;
+    }
+
 }

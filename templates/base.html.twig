@@ -31,7 +31,7 @@
                                 <a href="{{ path('app_user')}}">Profile</a>
                                 <a href="{{ path('app_commande')}}">Commande</a>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="">Panneau d'admin</a>
+                                    <a href="{{ path('app_admin')}}">Panneau d'admin</a>
                                 {% endif %}
                                 <a href="{{ path('app_logout')}}">Déconnexion</a>
                             </div>
