@@ -4,14 +4,44 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Form\CategorieType;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieController extends AbstractController
 {
+
+    #[Route('/categorie/add', name: 'add_categories')]
+    public function add(EntityManagerInterface $entityManager,  Request $request, PictureService $pictureService): Response
+    {
+        $form = $this->createForm(CategorieType::class);
+        $form->handleRequest($request);
+
+        $categorie = new Categorie();
+
+        if($form->isSubmitted() && $form->isValid()){
+            $image = $form->get('image')->getData();
+            
+            $fichier = $pictureService->add($image);
+
+            $categorie = $form->getData();
+            $categorie->setImage("Img/" . $fichier);
+            $entityManager->persist($categorie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_admin');
+        }
+
+        return $this->render('categorie/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     #[Route('/categorie/cafees moulues', name: 'app_categorie_cafees_moulues')]
     public function indexCafeesMoulues(EntityManagerInterface $entityManager): Response
     {

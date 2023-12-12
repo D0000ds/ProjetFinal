@@ -28,19 +28,8 @@ class UserController extends AbstractController
         $adressePrincipale = $entityManager->getRepository(Adresse::class)->findBy(['client' => $this->getUser()->getId()], ["id" => "ASC"], '1');
         $adresseSecondaire = $entityManager->getRepository(Adresse::class)->findBy(['client' => $this->getUser()->getId()], ["id" => "ASC"], null, 1);
 
-        $totalDepenser = 0;
-
-        foreach($commande as $c) {
-            $commandeArticles = $entityManager->getRepository(CommandeArticle::class)->findBy(['commande' => $c->getId()]);
-
-            foreach($commandeArticles as $ca){
-                $totalDepenser += $ca->getQuantite() * $ca->getArticle()->getPrix();
-            }
-        }
-
         return $this->render('user/index.html.twig', [
             'clients' => $clients,
-            'totalDepenser' => $totalDepenser,
             'moyenneSatisfaction' => $moyenneSatisfaction,
             'adressePrincipales' => $adressePrincipale,
             'adresseSecondaires' => $adresseSecondaire,

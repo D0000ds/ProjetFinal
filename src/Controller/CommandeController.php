@@ -63,4 +63,29 @@ class CommandeController extends AbstractController
             'commandes' => $commandes,
         ]);
     }
+
+    #[Route('/commande/VoirClickAndCollect', name: 'app_commande_VoirClickAndCollect')]
+    public function VoirClickAndCollect(EntityManagerInterface $entityManager): Response
+    {
+        $commandes = $entityManager->getRepository(Commande::class)->findBy(["clickAndCollect" => 1, "valider" => null]);
+
+        return $this->render('commande/VoirClickAndCollect.html.twig', [
+            'commandes' => $commandes,
+        ]);
+    }
+
+    #[Route('/commande/VoirClickAndCollect/valider/{id}', name: 'app_commande_VoirClickAndCollect_valider')]
+    public function valider($id, EntityManagerInterface $entityManager): Response
+    {
+        
+        $commande = $entityManager->getRepository(Commande::class)->find($id);
+        
+        $commande->setValider(true);
+
+        $entityManager->persist($commande);
+        $entityManager->flush();
+    
+        return $this->redirectToRoute('app_commande_VoirClickAndCollect');
+    }
+
 }

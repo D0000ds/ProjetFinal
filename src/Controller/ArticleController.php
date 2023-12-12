@@ -23,7 +23,12 @@ class ArticleController extends AbstractController
         $article = new Article();
 
         if($form->isSubmitted() && $form->isValid()){
+            $image = $form->get('image')->getData();
+            
+            $fichier = $pictureService->add($image);
+
             $article = $form->getData();
+            $article->setImage("Img/" . $fichier);
             $entityManager->persist($article);
             $entityManager->flush();
 

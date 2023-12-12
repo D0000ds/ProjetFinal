@@ -34,6 +34,9 @@ class Commande
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: CommandeArticle::class)]
     private Collection $commandeArticles;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $valider = null;
+
 
 
     public function __construct()
@@ -132,6 +135,18 @@ class Commande
                 $commandeArticle->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isValider(): ?bool
+    {
+        return $this->valider;
+    }
+
+    public function setValider(?bool $valider): static
+    {
+        $this->valider = $valider;
 
         return $this;
     }

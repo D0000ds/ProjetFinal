@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PayementController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for commande in commandes %}
+        {% for articleCommande in commande.CommandeArticles %}
+        <div class="commandeCard">
+            <figure class="suivieCommandeFig">
+                <img src="{{asset(articleCommande.article.image)}}" alt="{{ articleCommande.article.libelle }}">
+            </figure>
+            <div class="commandeSousCard">
+                <div class="commandeAvis">
+                    <span>{{ articleCommande.article.libelle }}</span>
+                    <a href="{{path('app_commande_VoirClickAndCollect_valider', {'id': commande.id})}}" class="btnAvis">Valider</a>
+                </div>
+                <span>quantité: {{articleCommande.quantite}}</span>
+                <span>Commander le {{ commande.dateCommande | date("d/m/Y") }} par {{ commande.facture.nomClient}} {{ commande.facture.prenomClient}}</span>
+            </div>
+        </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+{% endblock %}

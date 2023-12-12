@@ -376,7 +376,7 @@ main{
 }
 
 .cardContainer {
-    padding-left: 1%;
+    padding: 1%;
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -1857,4 +1857,8 @@ main{
 .btnAddArticle:hover{
     box-shadow: inset 500px 0 0 0 white;
     color: #765827;
+}
+/* ************************************************ADD FACTURE*************************************************************** */
+.formDate {
+    color: #1C62D7;
 }
