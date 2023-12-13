@@ -51,7 +51,7 @@ class Article
     #[ORM\ManyToMany(targetEntity: Avis::class, inversedBy: 'articles')]
     private Collection $avis;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: CommandeArticle::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: CommandeArticle::class, cascade:['remove'])]
     private Collection $commandeArticles;
 
  

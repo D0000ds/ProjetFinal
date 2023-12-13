@@ -15,12 +15,20 @@
             </svg>
         </div>
         <div class="registerForm">
-            <h1>Ajouter une Catégorie</h1>
+            {% if edit %}
+                <h1>Edit une Catégorie</h1>
+            {% else %}
+                <h1>Ajouter une Catégorie</h1>
+            {% endif %}
             {{ form_start(form, {'attr':{ 'class': 'formRegister'}}) }}
                 {{ form_row(form.libelle) }}
                 {{ form_row(form.code) }}
                 {{ form_row(form.image) }}
-                <button type="submit" class="btnAddArticle">Ajouter</button>
+                {% if edit %}
+                    <button type="submit" class="btnAddArticle">Editer</button>
+                {% else %}
+                    <button type="submit" class="btnAddArticle">Ajouter</button>
+                {% endif %}
             {{ form_end(form) }}
         </div>
     </div>

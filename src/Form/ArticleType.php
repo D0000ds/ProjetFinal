@@ -58,6 +58,7 @@ class ArticleType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => false,
                 'multiple' => false,
+                'data_class' => null,
             ])
             ->add('conservation', TextType::class, [
                 'label' => false,

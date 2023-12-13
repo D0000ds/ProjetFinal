@@ -39,7 +39,47 @@ class CategorieController extends AbstractController
 
         return $this->render('categorie/add.html.twig', [
             'form' => $form->createView(),
+            'edit' => false,
         ]);
+    }
+
+    #[Route('/categorie/edit/{id}', name: 'edit_categories')]
+    public function edit($id,EntityManagerInterface $entityManager,  Request $request, PictureService $pictureService): Response
+    {
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+
+        $form = $this->createForm(CategorieType::class, $categorie);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $image = $form->get('image')->getData();
+            
+            $fichier = $pictureService->add($image);
+
+            $categorie = $form->getData();
+            $categorie->setImage("Img/" . $fichier);
+            $entityManager->persist($categorie);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('categorie/add.html.twig', [
+            'form' => $form->createView(),
+            'edit' => $categorie->getId(),
+        ]);
+    }
+
+    #[Route('/categorie/delete/{id}', name: 'delete_categories')]
+    public function delete($id,EntityManagerInterface $entityManager): Response
+    {
+        $categorie = $entityManager->getRepository(Categorie::class)->find($id);
+
+        $entityManager->remove($categorie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home');
     }
 
     #[Route('/categorie/cafees moulues', name: 'app_categorie_cafees_moulues')]

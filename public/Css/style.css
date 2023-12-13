@@ -833,6 +833,19 @@ main{
     text-align: center;
 }
 
+.cateAllBtn{
+    display: flex;
+    flex-direction: row;
+}
+.btnCate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+    width: 80px;
+}
+
+
 /* **********************************************************REGISTER PAGE**************************************************************************************** */
 .registerContainer{
     display: flex;

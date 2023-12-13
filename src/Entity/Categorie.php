@@ -21,7 +21,7 @@ class Categorie
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Article::class)]
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Article::class, cascade:['remove'])]
     private Collection $articles;
 
     #[ORM\Column(length: 50)]

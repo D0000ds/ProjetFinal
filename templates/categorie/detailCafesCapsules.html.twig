@@ -10,7 +10,15 @@
         </figure>
     </div>
     <div class="cardContainer">
-        <h2>Tout les cafés de la catégorie {{categorie.libelle}} </h2>
+        <div class="cateAllBtn">
+            <h2>Tout les cafés de la catégorie {{categorie.libelle}} </h2>
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="btnCate">
+                    <a href="{{path('edit_categories', {'id': categorie.id})}}"  class="btnEdit"><i class="fa-solid fa-gear"></i></a>
+                    <a href="{{path('delete_categories', {'id': categorie.id})}}" class="btnDelete"><i class="fa-solid fa-trash"></i></a>
+                </div>
+            {% endif %}
+        </div>
         <div class="sousCardContainerDetail">
             {% if categorie.articles is empty %}
                 <h3 class="noArticle">Désolée il n'y pas d'article dans cette catégorie...</h3>

@@ -37,7 +37,47 @@ class ArticleController extends AbstractController
     
         return $this->render('article/add.html.twig', [
             'form' => $form->createView(),
+            'edit' => false,
         ]);
+    }
+
+    #[Route('/article/edit/{id}', name: 'edit_article')]
+    public function edit($id,EntityManagerInterface $entityManager, Request $request, PictureService $pictureService): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted() && $form->isValid()){
+            $image = $form->get('image')->getData();
+            
+            $fichier = $pictureService->add($image);
+
+            $article = $form->getData();
+            $article->setImage("Img/" . $fichier);
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('detail_article', ['id' => $id]);
+        }
+    
+        return $this->render('article/add.html.twig', [
+            'form' => $form->createView(),
+            'edit' => $article->getId(),
+        ]);
+    }
+
+    #[Route('/article/delete/{id}', name: 'delete_article')]
+    public function delete($id,EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home');
     }
 
     #[Route('/article/{id}', name: 'detail_article')]

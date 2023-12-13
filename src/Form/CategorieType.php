@@ -25,6 +25,7 @@ class CategorieType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => false,
                 'multiple' => false,
+                'data_class' => null,
             ])
             ->add('code', ChoiceType::class, [
                 'label' => false,
