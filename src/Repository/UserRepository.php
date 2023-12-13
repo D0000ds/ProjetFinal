@@ -54,4 +54,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         return $result;
     }
+
+    public function valideUser(){
+        $entityManager = $this->getEntityManager(); // get the EntityManager
+        $queryBuilder = $entityManager->createQueryBuilder();
+
+        $query = $queryBuilder
+            ->select('u')
+            ->from('App\Entity\User', 'u')
+            ->where($queryBuilder->expr()->neq('u.password', ':password'))
+            ->setParameter('password', 'delete')
+            ->getQuery();
+
+        $result = $query->getResult();
+
+        return $result;
+    }
 }

@@ -38,8 +38,18 @@
             </div>
         </div>
     </div>
-    <div>
-
+    <div class="userContainer">
+        <div class="userSousContainer">
+            <div class="input-control">
+                <label for="search"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input type="search" name="search" id="search" placeholder="Chercher un utilisateur">
+            </div>
+        </div>
+        <div class="card-result">
+            {% for user in users %}  
+                <input type="hidden" class="input-hidden" value="{{user.email}}">
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

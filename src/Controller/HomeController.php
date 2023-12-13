@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Origine;
 use App\Entity\Commande;
@@ -35,6 +36,8 @@ class HomeController extends AbstractController
     {
         $dateAjd = new DateTime();
 
+        $users = $entityManager->getRepository(User::class)->valideUser();
+
         $ajd =  date('d/m/Y', strtotime('-1 days'));
         $semaine =  date('d/m/Y', strtotime('-7 days'));
         $mois =  date('d/m/Y', strtotime('-1 month'));
@@ -60,6 +63,27 @@ class HomeController extends AbstractController
             'countMois' => $countMois,
             'countTotal' => $countTotal,
             'countAjd' => $countAjd,
+            'users' => $users,
         ]);
+    }
+
+    #[Route('/admin/ban/{email}', name: 'ban_admin')]
+    public function ban($email, EntityManagerInterface $entityManager){
+        $userArray = $entityManager->getRepository(User::class)->findBy(['email' => $email]);
+
+        foreach($userArray as $user){
+            $user->setEmail("ban");
+            $user->setPassword("Delete");
+            $user->setNewsLetter(false);
+            $user->setIsVerified(false);
+            $user->setTelephone("ban");
+            $user->setNom("ban");
+            $user->setPrenom("ban");
+            $this->container->get('security.token_storage')->setToken(null);
+
+            $entityManager->flush();
+        };
+        
+        return $this->redirectToRoute('app_admin');
     }
 }

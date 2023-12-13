@@ -75,7 +75,7 @@ class UserController extends AbstractController
     public function delete(EntityManagerInterface $entityManager){
         $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
 
-        $user->setEmail("Delete");
+        $user->setEmail("Delete" . $this->getUser()->getId());
         $user->setPassword("Delete");
         $user->setNewsLetter(false);
         $user->setIsVerified(false);

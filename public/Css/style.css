@@ -1774,6 +1774,77 @@ main{
     align-items: center;
 }
 
+.input-control {
+    display: flex;
+    align-items: center;
+    max-width: 450px;
+    background-color: #f4f4f4;
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.input-control label i{
+    font-size: 20px;
+}
+
+.input-control input{
+    font-size: 18px;
+    width: 100%;
+    outline: 0;
+    padding-left: 10px;
+    background-color: #f4f4f4;
+    color: black;
+    border: 0;
+}
+
+.userSousContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.userContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 2%;
+}
+
+.userCard{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    margin: 15px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px;
+}
+
+.userCard a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: #FF8080;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.card-result {
+    width: 95%;
+}
+
+.userCard a i {
+    font-size: 30px;
+}
+
 .addAdmin:active{
     transform: scale(0.96);
 }
@@ -1857,8 +1928,4 @@ main{
 .btnAddArticle:hover{
     box-shadow: inset 500px 0 0 0 white;
     color: #765827;
-}
-/* ************************************************ADD FACTURE*************************************************************** */
-.formDate {
-    color: #1C62D7;
 }
