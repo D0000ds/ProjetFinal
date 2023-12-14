@@ -769,6 +769,8 @@ main{
 .trieAvis{
     display: flex;
     flex-direction: column;
+    width: 550px;
+    text-align: center;
 }
 
 .trieAvis a {

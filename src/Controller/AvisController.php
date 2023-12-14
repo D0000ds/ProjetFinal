@@ -22,6 +22,7 @@ class AvisController extends AbstractController
         $count3 = 0;
         $count2 = 0;
         $count = 0;
+        $verif = false;
 
         $article = $entityManager->getRepository(Article::class)->find($id);
         $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
@@ -44,12 +45,249 @@ class AvisController extends AbstractController
 
         return $this->render('avis/index.html.twig', [
             'article' => $article,
+            'note' => false,
             'moyennes' =>  $moyennesNote,
-            'count' => $count,
+            'count1' => $count,
             'count2' => $count2,
             'count3' => $count3,
             'count4' => $count4,
             'count5' => $count5,
+            'verif' => false,
+        ]);
+    }
+
+    #[Route('/avis/{id}/note/1', name: 'app_avis_1')]
+    public function note1($id, EntityManagerInterface $entityManager): Response
+    {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        foreach($article->getAvis() as $avisCom){
+            $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
+        }
+
+        $verif = false;
+
+        if($count == 0){
+            $verif = true;
+        }
+
+        return $this->render('avis/index.html.twig', [
+            'article' => $article,
+            'note' => 1,
+            'moyennes' =>  $moyennesNote,
+            'count1' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
+            'verif' => $verif,
+        ]);
+    }
+
+    #[Route('/avis/{id}/note/2', name: 'app_avis_2')]
+    public function note2($id, EntityManagerInterface $entityManager): Response
+    {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        foreach($article->getAvis() as $avisCom){
+            $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
+        }
+
+        $verif = false;
+
+        if($count2 == 0){
+            $verif = true;
+        }
+
+        return $this->render('avis/index.html.twig', [
+            'article' => $article,
+            'note' => 2,
+            'moyennes' =>  $moyennesNote,
+            'count1' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
+            'verif' => $verif,
+        ]);
+    }
+
+    #[Route('/avis/{id}/note/3', name: 'app_avis_3')]
+    public function note3($id, EntityManagerInterface $entityManager): Response
+    {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        foreach($article->getAvis() as $avisCom){
+            $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
+        }
+
+        $verif = false;
+
+        if($count3 == 0){
+            $verif = true;
+        }
+
+        return $this->render('avis/index.html.twig', [
+            'article' => $article,
+            'note' => 3,
+            'moyennes' =>  $moyennesNote,
+            'count1' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
+            'verif' => $verif,
+        ]);
+    }
+
+    #[Route('/avis/{id}/note/4', name: 'app_avis_4')]
+    public function note4($id, EntityManagerInterface $entityManager): Response
+    {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        foreach($article->getAvis() as $avisCom){
+            $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
+        }
+
+        $verif = false;
+
+        if($count4 == 0){
+            $verif = true;
+        }
+
+        return $this->render('avis/index.html.twig', [
+            'article' => $article,
+            'note' => 4,
+            'moyennes' =>  $moyennesNote,
+            'count1' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
+            'verif' => $verif,
+        ]);
+    }
+
+    #[Route('/avis/{id}/note/5', name: 'app_avis_5')]
+    public function note5($id, EntityManagerInterface $entityManager): Response
+    {
+        $count5 = 0;
+        $count4 = 0;
+        $count3 = 0;
+        $count2 = 0;
+        $count = 0;
+
+        $article = $entityManager->getRepository(Article::class)->find($id);
+        $moyennesNote = $entityManager->getRepository(Article::class)->moyennes();
+
+        foreach($article->getAvis() as $avisCom){
+            $avis = $entityManager->getRepository(Avis::class)->find($avisCom->getId());
+            if($avis->getNote() == 5){
+                $count5++;
+            } elseif($avis->getNote() == 4){
+                $count4++;
+            } elseif($avis->getNote() == 3){
+                $count3++;
+            } elseif($avis->getNote() == 2){
+                $count2++;
+            } else{
+                $count++;
+            }
+            
+        }
+
+        $verif = false;
+
+        if($count5 == 0){
+            $verif = true;
+        }
+
+        return $this->render('avis/index.html.twig', [
+            'article' => $article,
+            'note' => 5,
+            'moyennes' =>  $moyennesNote,
+            'count1' => $count,
+            'count2' => $count2,
+            'count3' => $count3,
+            'count4' => $count4,
+            'count5' => $count5,
+            'verif' => $verif,
         ]);
     }
     

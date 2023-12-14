@@ -56,6 +56,14 @@
                     {% endif %}
                 {% endfor %}
             </div>
+            <div class="trieAvis">
+                <a href="{{path('app_avis_1', {'id': article.id})}}">1 étoile <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count1 }} avis)</a>
+                <a href="{{path('app_avis_2', {'id': article.id})}}">2 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count2 }} avis)</a>
+                <a href="{{path('app_avis_3', {'id': article.id})}}">3 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count3 }} avis)</a>
+                <a href="{{path('app_avis_4', {'id': article.id})}}">4 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count4 }} avis)</a>
+                <a href="{{path('app_avis_5', {'id': article.id})}}">5 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count5 }} avis)</a>
+                <a href="{{path('app_avis', {'id': article.id})}}">Tout les commentaires ({{count1 + count2 + count3 + count4 + count5}} avis)</a>
+            </div>
         </figure>
         <div class="commentaireContainer">
             <h1 class="commentaireContainerTitle">Avis et commentaires de {{article.libelle}}</h1>
@@ -63,84 +71,82 @@
             {% if article.avis is empty %}
                 <p>Cette article n'a pas encore de note et de commentaire.</p>
             {% endif %}
+            {% if verif == true %}
+                <h2>Il n'y a aucun avis a {{note}} étoile<i class="fa-solid fa-star" style="color: #EAC696;"></i></h2>
+            {% endif %}
             {% for commentaires in article.avis %}
-                <div class="commentaireCard">
-                    <div class="noteAvisPage">
-                        {# Système d'affichage d'étoile #}
-                        {% if commentaires.note == 5 %}
-                            <div class="avisPageStar">
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                            </div>
-                        {% elseif commentaires.note >= 4 %}
-                            <div class="avisPageStar">
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                            </div>
-                        {% elseif commentaires.note >= 3 %}
-                            <div class="avisPageStar">
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                            </div>
-                        {% elseif commentaires.note >= 2 %}
-                            <div class="avisPageStar">
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                            </div>
-                        {% else %}
-                            <div class="avisPageStar">
-                                <i class="fa-solid fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                                <i class="fa-regular fa-star" style="color: #EAC696;"></i>
-                            </div>
-                        {% endif %}
-                            <div class="spanAvis">
-                                <span>de la part d'un utilisateur anonyme</span>
-                                <div class="Allbtn">
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="{{path('app_avis_del', {'id': commentaires.id})}}" class="btnDelete"><i class="fa-solid fa-trash"></i></a>
-                                    <a href="{{path('edit_avis', {'id': article.id})}}" class="btnEdit"><i class="fa-solid fa-gear"></i></a> 
-                                {% elseif app.user.id == commentaires.client.id %}
-                                    <a href="{{path('app_avis_del', {'id': commentaires.id})}}" class="btnDelete"><i class="fa-solid fa-trash"></i></a>
-                                    <a href="{{path('edit_avis', {'id': article.id})}}" class="btnEdit"><i class="fa-solid fa-gear"></i></a> 
-                                {% endif %}
+                {% if commentaires.note == note or note == false %}
+                    <div class="commentaireCard">
+                        <div class="noteAvisPage">
+                            {# Système d'affichage d'étoile #}
+                            {% if commentaires.note == 5 %}
+                                <div class="avisPageStar">
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
                                 </div>
-                            </div>
+                            {% elseif commentaires.note >= 4 %}
+                                <div class="avisPageStar">
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% elseif commentaires.note >= 3 %}
+                                <div class="avisPageStar">
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% elseif commentaires.note >= 2 %}
+                                <div class="avisPageStar">
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% else %}
+                                <div class="avisPageStar">
+                                    <i class="fa-solid fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                    <i class="fa-regular fa-star" style="color: #EAC696;"></i>
+                                </div>
+                            {% endif %}
+                                <div class="spanAvis">
+                                    <span>de la part d'un utilisateur anonyme</span>
+                                    <div class="Allbtn">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a href="{{path('app_avis_del', {'id': commentaires.id})}}" class="btnDelete"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="{{path('edit_avis', {'id': article.id})}}" class="btnEdit"><i class="fa-solid fa-gear"></i></a> 
+                                    {% elseif app.user.id == commentaires.client.id %}
+                                        <a href="{{path('app_avis_del', {'id': commentaires.id})}}" class="btnDelete"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="{{path('edit_avis', {'id': article.id})}}" class="btnEdit"><i class="fa-solid fa-gear"></i></a> 
+                                    {% endif %}
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="commentaire">
+                            {% if commentaires.commentaire == null %}
+                                <p>Cette personne n'a pas laissé de commentaire.</p>
+                            {% else %}
+                                <p>{{commentaires.commentaire}}</p>
+                            {% endif %}
+                        </div>
+                        <div class="date">
+                            <span>le {{commentaires.datePost | date("d/m/Y")}}</span>
+                        </div>
                     </div>
-                    <div class="commentaire">
-                        {% if commentaires.commentaire == null %}
-                            <p>Cette personne n'a pas laissé de commentaire.</p>
-                        {% else %}
-                            <p>{{commentaires.commentaire}}</p>
-                        {% endif %}
-                    </div>
-                    <div class="date">
-                        <span>le {{commentaires.datePost | date("d/m/Y")}}</span>
-                    </div>
-                </div> 
+                {% endif %}
             {% endfor %}
         </div>
-    </div>
-    <div class="trieAvis">
-        <a href="">1 étoile <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count }} avis)</a>
-        <a href="">2 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count2 }} avis)</a>
-        <a href="">3 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count3 }} avis)</a>
-        <a href="">4 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count4 }} avis)</a>
-        <a href="">5 étoiles <i class="fa-solid fa-star" style="color: #EAC696;"></i>({{ count5 }} avis)</a>
     </div>
 </div>
 {% endblock %}
