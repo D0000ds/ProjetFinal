@@ -93,7 +93,7 @@ class CommandeRepository extends ServiceEntityRepository
          return $result;
     }
 
-     /**
+    /**
     * @return Commande[] Returns an array of Commande objects
     */
     public function date($dateAjd, $annee): array
@@ -115,4 +115,18 @@ class CommandeRepository extends ServiceEntityRepository
          return $result;
     }
 
+    /**
+    * @return Commande[] Returns an array of Commande objects
+    */
+    public function paginationQuery(): array
+    {
+         $query = $queryBuilder
+             ->select('c')
+             
+             ->getQuery();
+ 
+         $result = $query->getResult();
+ 
+         return $result;
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Commande;
 use App\Entity\CommandeArticle;
+use Knp\Component\Pager\Paginator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,9 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, Request $request, Paginator $paginator): Response
     {
         $commandes = $entityManager->getRepository(Commande::class)->findBy(["client" => $this->getUser()->getId()], ["dateCommande" => "DESC"]);
+
+        $pagination = $paginator->paginate();
 
         return $this->render('commande/index.html.twig', [
             'commandes' => $commandes,
